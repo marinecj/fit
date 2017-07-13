@@ -1,0 +1,97 @@
+/* bourbon framework */
+@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+html {
+  color: #2b323f;
+  background: #FFF;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+  html *, html *::before, html *::after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit; }
+
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6,
+pre, code, form, fieldset, legend,
+input, textarea, p, blockquote,
+th, td {
+  margin: 0;
+  padding: 0; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+fieldset, img {
+  border: 0; }
+
+address, caption, cite, code, dfn, em, th, var, strong {
+  font-style: normal;
+  font-weight: normal; }
+
+strong {
+  font-weight: bold; }
+
+ol, ul {
+  list-style: none; }
+
+caption, th {
+  text-align: left; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal; }
+
+q:before, q:after {
+  content: ''; }
+
+abbr, acronym {
+  border: 0;
+  font-variant: normal; }
+
+sup {
+  vertical-align: text-top; }
+
+sub {
+  vertical-align: text-bottom; }
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit; }
+
+input,
+textarea,
+select {
+  *font-size: 100%; }
+
+legend {
+  color: #000; }
+
+img {
+  display: inline-block;
+  vertical-align: top; }
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../asset/fonts/NanumSquareR.eot);
+  src: url(../../asset/fonts/NanumSquareR.eot?#iefix) format("embedded-opentype"), url(../../asset/fonts/NanumSquareR.woff) format("woff"), url(../../asset/fonts/NanumSquareR.ttf) format("truetype"); }
+@font-face {
+  font-family: 'NanumSquare Light';
+  src: url(../../asset/fonts/NanumSquareL.eot);
+  src: url(../../asset/fonts/NanumSquareL.eot?#iefix) format("embedded-opentype"), url(../../asset/fonts/NanumSquareL.woff) format("woff"), url(../../asset/fonts/NanumSquareL.ttf) format("truetype"); }
+@font-face {
+  font-family: 'NanumSquare Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url(../../asset/fonts/NanumSquareB.eot);
+  src: url(../../asset/fonts/NanumSquareB.eot?#iefix) format("embedded-opentype"), url(../../asset/fonts/NanumSquareB.woff) format("woff"), url(../../asset/fonts/NanumSquareB.ttf) format("truetype"); }
+@font-face {
+  font-family: 'NanumSquare ExtraBold';
+  src: url(../../asset/fonts/NanumSquareEB.eot);
+  src: url(../../asset/fonts/NanumSquareEB.eot?#iefix) format("embedded-opentype"), url(../../asset/fonts/NanumSquareEB.woff) format("woff"), url(../../asset/fonts/NanumSquareEB.ttf) format("truetype"); }
+
+/*# sourceMappingURL=reset.css.map */

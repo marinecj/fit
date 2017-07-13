@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fithawaii.dao.FitDAO">
+	<resultMap id="HotelInfoResult" type="HotelInfo">
+		<result property="hotelNo" column="hotel_no" />
+		<result property="hotelNm" column="hotel_nm" />
+		<result property="hotelNmKr" column="hotel_nm_kr" />
+		<result property="nat" column="nat" />
+		<result property="state" column="state" />
+		<result property="stateKr" column="state_kr" />
+		<result property="country" column="country" />
+	</resultMap>
+
+	<resultMap id="HotelCategoryInfoResult" type="HotelCategoryInfo">
+		<result property="cateNo" column="cate_no" />
+		<result property="hotelNo" column="hotel_no" />
+		<result property="cateNm" column="cate_nm" />
+		<result property="duration1" column="duration1" />
+		<result property="duration2" column="duration2" />
+		<result property="duration3" column="duration3" />
+		<result property="duration4" column="duration4" />
+		<result property="remark" column="remark" />
+		<result property="cancelPolicy" column="cancel_policy" />
+	</resultMap>
+
+	<resultMap id="HotelRoomInfoResult" type="HotelRoomInfo">
+		<result property="typeNo" column="type_no" />
+		<result property="hotelNo" column="hotel_no" />
+		<result property="cateNo" column="cate_no" />
+		<result property="typeNm" column="type_nm" />
+		<result property="agencyCd" column="agency_cd" />
+		<result property="price1" column="price1" />
+		<result property="price2" column="price2" />
+		<result property="price3" column="price3" />
+		<result property="price4" column="price4" />
+		<result property="breakfastYn" column="breakfast_yn" />
+		<result property="breakfastPrice" column="breakfast_price" />
+		<result property="cotPrice" column="cot_price" />
+		<result property="cradleYn" column="cradle_yn" />
+		<result property="acYn" column="ac_yn" />
+		<result property="fridgeYn" column="fridge_yn" />
+		<result property="bathYn" column="bath_yn" />
+		<result property="gardenYn" column="garden_yn" />
+		<result property="vaultYn" column="vault_yn" />
+	</resultMap>
+
+	<resultMap id="HotelAllInfoResult" type="HotelAllInfo">
+		<association property="hotelInfo" javaType="HotelInfo" resultMap="HotelInfoResult"/>
+		<association property="cateInfo" javaType="HotelCategoryInfo" resultMap="HotelCategoryInfoResult"/>
+		<association property="roomInfo" javaType="HotelRoomInfo" resultMap="HotelRoomInfoResult"/>
+	</resultMap>
+
+	<select id="selectHotelRecommendInfo" resultMap="HotelAllInfoResult">
+		SELECT
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
+			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn
+		FROM
+			fit_hotel_info i
+				INNER JOIN fit_hotel_rcmd rc ON i.hotel_no = rc.hotel_no AND rc.use_yn = 'Y'
+				INNER JOIN fit_hotel_cate c ON i.hotel_no = c.hotel_no
+				INNER JOIN fit_room_type r ON i.hotel_no = r.hotel_no AND c.cate_no = r.cate_no
+	</select>
+
+	<select id="selectHotelAllInfo" parameterType="map" resultMap="HotelAllInfoResult">
+		SELECT
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
+			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn
+		FROM
+			fit_hotel_info i, fit_hotel_cate c, fit_room_type r
+		WHERE
+			i.hotel_no = c.hotel_no
+			AND i.hotel_no = r.hotel_no
+			AND c.cate_no = r.cate_no
+		<if test="hotelNo != null">
+			AND i.hotel_no = #{hotelNo}
+			<if test="cateNo != null">
+				AND i.cate_no = #{cateNo}
+				<if test="typeNo != null">
+					AND i.type_no = #{typeNo}
+				</if>
+			</if>
+		</if>
+	</select>
+
+	<select id="selectHotelSearchResult" parameterType="String" resultMap="HotelAllInfoResult">
+		SELECT
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
+			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn
+		FROM
+			fit_hotel_info i, fit_hotel_cate c, fit_room_type r
+		WHERE
+			i.hotel_no = c.hotel_no
+			AND i.hotel_no = r.hotel_no
+			AND c.cate_no = r.cate_no
+			AND (
+				hotel_nm LIKE CONCAT('%', #{key}, '%')
+				OR hotel_nm_kr LIKE CONCAT('%', #{key}, '%')
+				OR state LIKE CONCAT('%', #{key}, '%')
+				OR state_kr LIKE CONCAT('%', #{key}, '%')
+			)
+	</select>
+
+	<select id="selectHotelDetailResult" parameterType="int" resultMap="HotelAllInfoResult">
+		SELECT
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
+			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn
+		FROM
+			fit_hotel_info i, fit_hotel_cate c, fit_room_type r
+		WHERE
+			i.hotel_no = c.hotel_no
+			AND i.hotel_no = r.hotel_no
+			AND c.cate_no = r.cate_no
+			AND r.type_no = #{typeNo}
+	</select>
+
+	<resultMap id="resultFitMap" type="Fit">
+		<result property="test1" column="test1" />
+		<result property="test2" column="test2" />
+	</resultMap>
+
+	<select id="selectTest" resultMap="resultFitMap">
+		SELECT *
+		FROM fit_test
+		WHERE 1 = 1
+	</select>
+</mapper>

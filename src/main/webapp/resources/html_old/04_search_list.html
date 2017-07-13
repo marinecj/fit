@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Fithawall</title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <script type="text/javascript" src="../asset/js/plugin/jquery.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/TweenMax.min.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/jquery-placeholder.min.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/jquery-ui.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/moment.min.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/jquery.daterangepicker.min.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/jquery.bxslider.min.js"></script>
+  <link rel="stylesheet" href="../asset/css/common.css?ver=20170207">
+  <link rel="stylesheet" href="../asset/css/dep.css"><!-- 개발 시 별도로 스타일을 추가할 때 -->
+</head>
+<body>
+
+<dl class="skip">
+  <dt>바로가기 메뉴</dt>
+  <dd><a href="#header">메인 메뉴 바로가기</a></dd>
+  <dd><a href="#container">본문 바로가기</a></dd>
+</dl>
+
+<div class="wrap">
+  <div id="header" class="wide">
+    <div class="in-wrap">
+      <h1><a href="#"><img src="../asset/images/layout/logo.png" alt="FITHAWALL" /></a></h1>
+      <div class="gnb">
+        <ul>
+          <li><a href="#">오하우</a></li>
+          <li><a href="#">마우이</a></li>
+          <li><a href="#">빅아일랜드</a></li>
+          <li><a href="#">카우아이</a></li>
+        </ul>
+      </div>
+      <div class="util">
+        <ul>
+          <li><a href="#">도움말</a></li>
+          <li><a href="#">회원가입</a></li>
+          <li><a href="#">로그인</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="container" class="goods-list-wrap">
+    <div id="contents">
+      <div class="search-sec">
+        <div class="row-group">
+          <div class="keyword-input">
+            <input type="text" id="keyword" maxlength="10" data-placeholder="어떤 스타일의 호텔을 원하세요?" placeholder="어떤 스타일의 호텔을 원하세요?" />
+            <div class="ui-autocomplete-wrap">
+              <div class="other">
+                <span><a href="01_main.html">오하우</a></span>
+                <span><a href="01_main.html">마우이</a></span>
+                <span><a href="01_main.html">빅아일랜드</a></span>
+                <span><a href="01_main.html">카우아이</a></span>
+              </div>
+            </div>
+          </div>
+          <div class="date-rang-picker">
+            <input type="hidden" id="date-range1" />
+            <input type="hidden" id="date-range2" />
+            <button><span><em data-txt="체크인"></em></span><span><em data-txt="체크아웃"></em></span></button>
+            <div class="date-rang-layer">
+              <div class="row"></div>
+              <div class="gp-close-box">
+                <a href="#" class="close">닫기</a>
+              </div>
+            </div>
+          </div>
+          <div class="guest-picker">
+            <button type="button" class="guest-trigger">
+              <span class="tt">숙박 인원</span>
+              <span class="num">총 <em></em>명</span>
+            </button>
+            <div class="guest-picker-layer" style="display: none;">
+              <div class="row" data-idx="0" data-min="2" data-max="15">
+                <div class="label">
+                  <span>어른</span><input type="text" readonly />
+                </div>
+                <div class="spinner-btn">
+                  <button type="button" class="minus">빼기</button>
+                  <button type="button" class="plus">더하기</button>
+                </div>
+              </div>
+              <div class="row" data-idx="1" data-min="0" data-max="5">
+                <div class="label">
+                  <span>청소년(25개월~12살)</span><input type="text" readonly />
+                </div>
+                <div class="spinner-btn">
+                  <button type="button" class="minus">빼기</button>
+                  <button type="button" class="plus">더하기</button>
+                </div>
+              </div>
+              <div class="row" data-idx="2" data-min="0" data-max="5">
+                <div class="label">
+                  <span>유아(24개월미만)</span><input type="text" readonly />
+                </div>
+                <div class="spinner-btn">
+                  <button type="button" class="minus">빼기</button>
+                  <button type="button" class="plus">더하기</button>
+                </div>
+              </div>
+              <div class="gp-close-box">
+                <a href="#" class="close">닫기</a>
+              </div>
+            </div>
+          </div>
+          <button class="i-btn bt-sch">검색</button>
+        </div>
+        <div class="row-group">
+          <div class="room-num">
+            <div class="custom-select">
+              <label class="tit"><span>객실수</span></label>
+              <select>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div><!-- end : select-box -->
+          </div>
+          <div class="room-type">
+            <span class="tit">가격선택</span>
+            <div class="sel-cover">
+              <label for="room-type1"><input type="checkbox" id="room-type1" /> 1인실</label>
+              <label for="room-type2"><input type="checkbox" id="room-type2" /> 2인실</label>
+              <label for="room-type3"><input type="checkbox" id="room-type3" /> 2인실(더블침대)</label>
+              <label for="room-type4"><input type="checkbox" id="room-type4" /> 3인실</label>
+            </div>
+          </div>
+        </div>
+        <div class="row-group">
+          <div class="price-range">
+            <span class="tit">가격선택</span>
+            <span class="amount min"><input type="text" id="amountMin" readonly />원</span>
+            <span class="amount max"><input type="text" id="amountMax" readonly />원</span>
+            <div id="slider-range"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tit-box">
+        <h2>오하우호텔 검색 결과</h2>
+        <h3><strong class="pt1">오하우호텔</strong>로 총 <strong class="pt1">29</strong>개가 검색 되었습니다.</h3>
+        <div class="sort">
+          <div class="custom-select" style="width: 162px;">
+            <label><span></span></label>
+            <select>
+              <option>인기순</option>
+              <option>추천순</option>
+              <option>이름순</option>
+              <option>가격순</option>
+            </select>
+          </div><!-- end : select-box -->
+        </div>
+      </div>
+      <div class="goods-list" data-over-ty="1">
+        <ul>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="photo-box">
+                <div class="photo"><img src="../asset/images/temp/goods_list_photo.jpg" alt="350*300" /></div>
+                <div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
+              </div>
+              <div class="info-box">
+                <div class="t1">힐튼 하와이안 빌리지</div>
+                <div class="t2">Hilton Hawaiian Village Waikiki Beach Resort</div>
+                <div class="tag">
+                  <span><em class="i1">리조트피 포함</em></span>
+                  <span><em class="i2">조식 포함</em></span>
+                  <span><em class="i3">5성급 호텔</em></span>
+                </div>
+                <div class="price">
+                  <p class="p1"><em>364,478원</em>(20%DC)</p>
+                  <p class="p2"><strong>284,478</strong>원</p>
+                </div>
+                <div class="etc">
+                  <span>리뷰 <em>56</em>건</span>
+                  <span>평점 <em>9.0</em>점</span>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="paging">
+        <a href="#" class="btn first">처음</a>
+        <a href="#" class="btn prev">이전</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#" class="active">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#" class="btn next">다음</a>
+        <a href="#" class="btn last">마지막</a>
+        <span class="total">총 <em>10</em>건(<em>1</em>/1page)</span>
+      </div><!-- end : paging -->
+    </div><!-- end : #contents -->
+
+    <div id="footer">
+      <div class="in-wrap">
+        <div class="fo-etc-links">
+          <a href="#" class="e1">정책 및 약관</a>
+          <a href="#" class="e2">이용약관</a>
+          <a href="#" class="e3">개인정보취급방침</a>
+          <a href="#" class="e4">핏하와이정책</a>
+          <a href="#" class="e5">고객센터</a>
+          <a href="#" class="e6">Contect Us</a>
+        </div>
+        <div class="fo-sns">
+          <a href="#"><img src="../asset/images/layout/fo_sns1.png" alt="페이스북" /></a>
+          <a href="#"><img src="../asset/images/layout/fo_sns2.png" alt="인스타" /></a>
+          <a href="#"><img src="../asset/images/layout/fo_sns3.png" alt="네이버" /></a>
+        </div>
+        <div class="fo-etc-info">
+          <p>
+            비비드미디어 <span class="bar">|</span>
+            대표 정희철 외 <span class="bar">|</span>
+            개인정보책임자 홍길동
+          </p>
+          <p>
+            사업자등록번호 : 220-05-69118 <span class="bar">|</span>
+            통신판매업신고번호 : 제 2014-서울 서초-1067 호 <span class="bar">|</span>
+            사업자정보확인
+          </p>
+          <p>
+            서울시 서초구 서초대로73길 42 리가스퀘어 607호 <span class="bar">|</span>
+            TEL 02-501-0435   FAX 02-501-0465
+          </p>
+        </div>
+      </div>
+    </div>
+  </div><!-- end : #container -->
+
+  <div class="map-wrap">지도앱 작업</div>
+</div><!-- end : wrap -->
+
+<script src="../asset/js/ui.js"></script>
+<script src="../asset/js/util.js"></script>
+<script>
+  //$(".fv-slides ul").bxSlider({speed: 600, auto: true, autoControls:false});
+  ui.rangeSlider(231560, 3541650);
+  $("#slider-range" ).on("slidechange", function(event, ui) {console.log(2)});
+  ui.mapSize();
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Fit" type="com.fithawaii.model.Fit" />
+		<typeAlias alias="HotelAllInfo" type="com.fithawaii.model.HotelAllInfo" />
+		<typeAlias alias="HotelInfo" type="com.fithawaii.model.HotelInfo" />
+		<typeAlias alias="HotelCategoryInfo" type="com.fithawaii.model.HotelCategoryInfo" />
+		<typeAlias alias="HotelRoomInfo" type="com.fithawaii.model.HotelRoomInfo" />
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<!-- connecting to Local MySql -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://fit.cdtm42hyly8n.ap-northeast-2.rds.amazonaws.com:3306/fit?characterEncoding=utf8" />
+				<property name="username" value="fit_master" />
+				<property name="password" value="vltgkdhkdl" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<!--<mapper resource="com/fithawaii/mapper/com.fithawaii.fit.xml" />-->
+		<mapper resource="com.fithawaii.fit.xml" />
+	</mappers>
+
+</configuration>

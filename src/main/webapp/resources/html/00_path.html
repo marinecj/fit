@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>fithawall</title>
+  <script type="text/javascript" src="../asset/js/plugin/jquery.js"></script>
+  <script src="../asset/js/plugin/jquery-placeholder.min.js"></script>
+  <script src="../asset/js/ui.js"></script>
+  <link rel="stylesheet" href="../asset/css/common.css">
+  <style type="text/css">
+    body {padding:20px;}
+    #worksWrap {min-width:750px}
+    #worksWrap table{width:100%; border-collapse:collapse;border-spacing:0}
+    #worksWrap table th, table td {padding:3px 10px 4px; color:#444; border:1px solid #ccc; text-align:left; border-right:none;}
+    #worksWrap table tr th:first-child,
+    #worksWrap table tr td:first-child {border-left:none;}
+    #worksWrap table thead th {color:#fff; background-color:#000; text-align:center;}
+    #worksWrap table tbody th {background:#eee;}
+    #worksWrap table tr:hover td {color:#000;background-color:#fafafa; }
+    #worksWrap table tr:hover a {color:#1d2088}
+    #worksWrap td span {background:#000; color:#fff; display:inline-block; padding:1px 4px 0 3px; margin:3px 3px 0 0;}
+    #worksWrap td.name span {display:inline-block; margin-left:10px; position:relative; top:-1px;}
+  </style>
+</head>
+<body>
+<div id="worksWrap">
+  <div class="FrontTable">
+    <table>
+      <col width="30%" /><col width="30%" /><col width="20%" /><col width="*" />
+      <thead><tr><th scope="col">1Depth</th><th scope="col">파일명</th><th scope="col">etc</th></tr></thead>
+      <tbody id="FrontList">
+        <tr><th colspan="3"><strong>공통</strong><span class="folder"></span></th></tr>
+        <tr>
+          <td class="name">상단</td>
+          <td><a href="inc_header.html" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">하단</td>
+          <td><a href="inc_footer.html" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+
+        <tr><th colspan="3"><strong>레이어팝업</strong><span class="folder"></span></th></tr>
+        <tr>
+          <td class="name">로그인</td>
+          <td><a href="#pop-login" onclick="popup.layerPop($(this)); return false;" class="pop" title="레이어팝업"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">포인트 선물하기</td>
+          <td><a href="#pop-gift-step1" onclick="popup.layerPop($(this)); return false;" class="pop" title="레이어팝업"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">회원검색</td>
+          <td><a href="#pop-gift-step2" onclick="popup.layerPop($(this)); return false;" class="pop" title="레이어팝업"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">회원검색 결과</td>
+          <td><a href="#pop-gift-step3" onclick="popup.layerPop($(this)); return false;" class="pop" title="레이어팝업"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">선물하기 완료</td>
+          <td><a href="#pop-gift-step4" onclick="popup.layerPop($(this)); return false;" class="pop" title="레이어팝업"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">비회원 선물하기</td>
+          <td><a href="#pop-gift-step2-no" onclick="popup.layerPop($(this)); return false;" class="pop" title="레이어팝업"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">비회원 선물하기 완료</td>
+          <td><a href="#pop-gift-step3-no" onclick="popup.layerPop($(this)); return false;" class="pop" title="레이어팝업"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">공유하기</td>
+          <td><a href="#pop-share-step1" onclick="popup.layerPop($(this)); return false;" class="pop" title="레이어팝업"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">공유하기 완료</td>
+          <td><a href="#pop-share-step2" onclick="popup.layerPop($(this)); return false;" class="pop" title="레이어팝업"></a></td>
+          <td class="etc"></td>
+        </tr>
+
+        <tr><th colspan="3"><strong>상품관련</strong><span class="folder"></span></th></tr>
+        <tr>
+          <td class="name">메인</td>
+          <td><a href="01_main.html" class="end" target="_blank"></a></td>
+          <td class="etc">2017-02-03 : 최근 본 상품 추가</td>
+        </tr>
+        <tr>
+          <td class="name">상세</td>
+          <td><a href="02_detail.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">지역홈</td>
+          <td><a href="03_region_home.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">검색결과리스트</td>
+          <td><a href="04_search_list.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+
+        <tr><th colspan="3"><strong>마이페이지</strong><span class="folder"></span></th></tr>
+        <tr>
+          <td class="name">메인</td>
+          <td><a href="05_mypabe_0_main.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">구매내역상세</td>
+          <td><a href="05_mypabe_1_1_buydetail.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">지난구매내역</td>
+          <td><a href="05_mypabe_1_2_passbuy.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">관심상품</td>
+          <td><a href="05_mypabe_1_3_attention.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">회원정보</td>
+          <td><a href="05_mypabe_2_1_info.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">포인트</td>
+          <td><a href="05_mypabe_2_2_point.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">문의내역</td>
+          <td><a href="05_mypabe_2_3_inquiry.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+
+
+
+        <tr><th colspan="3"><strong>도움말</strong><span class="folder"></span></th></tr>
+        <tr>
+          <td class="name">Q&A 리스트</td>
+          <td><a href="06_help_1_qa_list.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">Q&A 쓰기</td>
+          <td><a href="06_help_1_qa_write.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">Q&A 읽기</td>
+          <td><a href="06_help_1_qa_view.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">FAQ</td>
+          <td><a href="06_help_2_faq.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">공지사항</td>
+          <td><a href="06_help_3_notice.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+        <tr>
+          <td class="name">이벤트</td>
+          <td><a href="06_help_4_event.html" class="end" target="_blank"></a></td>
+          <td class="etc"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="listFoot">
+    <span id="pages">
+      <br />
+      total : <em class="total">0</em><br />
+      진행중 : <em class="ing">0</em><br />
+      완료 : <em class="">0</em><br />
+      진행률 : (<strong class="percent">0%</strong>)
+    </span>
+  </p>
+</div>
+
+<!-- start : includeLayer 임시코드 인크루드시 삭제 -->
+<div id="includeLayer"></div>
+<script type="text/javascript">$("#includeLayer").load("inc_layer.html", ui.radioCheck);</script>
+<!-- end : includeLayer 임시코드 인크루드시 삭제 -->
+
+
+
+<script src="../asset/js/ui.js"></script>
+<script src="../asset/js/popup.js"></script>
+<script src="../asset/js/util.js"></script>
+
+
+<script type="text/javascript">
+  var state = $("#FrontList");
+  $("#FrontList").find("a").html(function(){
+    if((/\/[^\/]+\.html$/).test(this.href)){ return this.href.substring(this.href.lastIndexOf("/")+1);}
+    if($(this).hasClass("pop")){return this.href.substring(this.href.lastIndexOf("#")+1);}
+  });
+  var end = state.find("a").filter(".end").filter(function(){ return (/\/[^\/]+\.html$/).test(this.href) && !this.href.match(/path.html/); }).length;
+  var ing = state.find("a").filter(".ing").filter(function(){ return (/\/[^\/]+\.html$/).test(this.href) && !this.href.match(/path.html/); }).length;
+  $("#pages").find("em").eq(0).html(end+ing).end().eq(1).html(ing).end().eq(2).html(end).end().end().find("strong").html((parseInt(end/(end+ing)*100))+'%' );
+
+  state.find(".name").each(function(){
+    var a = $(this).html();
+    var b = $(this).siblings().find("a").attr("class");
+    if(b!=undefined || b!=null){
+      $(this).html(a+"<span class='"+ b +"'>"+ b +"</span>");
+    }
+  }
+);
+</script>
+
+</body>
+</html>

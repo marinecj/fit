@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Fithawall</title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <script type="text/javascript" src="../asset/js/plugin/jquery.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/TweenMax.min.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/jquery-placeholder.min.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/jquery-ui.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/moment.min.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/jquery.daterangepicker.min.js"></script>
+  <script type="text/javascript" src="../asset/js/plugin/jquery.bxslider.min.js"></script>
+  <link rel="stylesheet" href="../asset/css/common.css?ver=20170207">
+  <link rel="stylesheet" href="../asset/css/dep.css"><!-- 개발 시 별도로 스타일을 추가할 때 -->
+</head>
+<body>
+
+<dl class="skip">
+  <dt>바로가기 메뉴</dt>
+  <dd><a href="#header">메인 메뉴 바로가기</a></dd>
+  <dd><a href="#container">본문 바로가기</a></dd>
+</dl>
+
+<div class="wrap">
+  <!-- start : includeHeader 임시코드 인크루드시 삭제 -->
+  <div id="includeHeader"></div>
+  <script type="text/javascript">$("#includeHeader").load("inc_header.html");</script>
+  <!-- end : includeHeader 임시코드 인크루드시 삭제 -->
+
+  <div id="container" class="col-group-wrap">
+
+    <div id="contents">
+
+      <div class="col-group">
+        <div class="left-menu">
+          <div class="my-profile">
+            <div class="photo"></div>
+            <a href="#" class="i-btn bt-photo-add"></a>
+            <p class="mail"><a href="mailto:fithawaiihotel@gmail.com">fithawaiihotel@gmail.com</a></p>
+          </div>
+          <ul>
+            <li><a href="#">구매 내역</a></li>
+            <li><a href="#">지난 구매 내역</a></li>
+            <li><a href="#">관심 상품</a></li>
+          </ul>
+          <ul>
+            <li><a href="#" class="act">회원 정보</a></li>
+            <li><a href="#">포인트</a></li>
+            <li><a href="#">문의내역</a></li>
+          </ul>
+        </div><!-- end : .left-menu -->
+
+        <div class="con-section">
+          <h2 class="sr-only">마이페이지</h2>
+
+          <h3>회원정보</h3>
+          <div class="tb-ty3">
+            <table>
+              <colgroup>
+                <col width="20%" />
+                <col width="*" />
+              </colgroup>
+              <tbody>
+              <tr>
+                <th>아이디</th>
+                <td>lwa8010</td>
+              </tr>
+              <tr>
+                <th>비밀번호</th>
+                <td><a href="#" class="link-ty1">비밀번호 변경</a></td>
+              </tr>
+              <tr>
+                <th>이메일</th>
+                <td>lwa8010@naver.com</td>
+              </tr>
+              <tr>
+                <th>핸드폰 번호</th>
+                <td>010-****-2993</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div><!-- end : .con-section -->
+      </div><!-- end : .col-group -->
+
+    </div><!-- end : #contents -->
+
+    <!-- start : includeFooter 임시코드 인크루드시 삭제 -->
+    <div id="includeFooter"></div>
+    <script type="text/javascript">$("#includeFooter").load("inc_footer.html");</script>
+    <!-- end : includeFooter 임시코드 인크루드시 삭제 -->
+  </div><!-- end : #container -->
+
+  <div class="map-wrap">지도앱 작업</div>
+</div><!-- end : wrap -->
+
+<script src="../asset/js/ui.js"></script>
+<script src="../asset/js/util.js"></script>
+</body>
+</html>
