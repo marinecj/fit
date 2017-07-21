@@ -515,6 +515,10 @@ dl.skip a:focus {
     background-position: -250px -150px; }
     .i-btn.bt-close:hover {
       background-position: -280px -150px; }
+  .i-btn.bt-payment {
+    width: 261px;
+    height: 60px;
+    background-position: 0 -590px; }
 
 .t-btn {
   font-size: 14px;
@@ -557,6 +561,12 @@ dl.skip a:focus {
     color: #fff;
     background: #222;
     min-width: 90px; }
+  .t-btn.ty6 {
+    height: 28px;
+    line-height: 30px;
+    padding: 0 10px;
+    color: #fff;
+    background: #888; }
 
 .link-ty1 {
   color: #fd4741;
@@ -1156,13 +1166,23 @@ textarea {
   cursor: pointer;
   border: 1px dotted transparent; }
 
-.custom-checkbox label {
-  background: url("../../asset/images/btn/checkbox_off.gif") 0 50% no-repeat; }
-.custom-checkbox label.on {
-  background-image: url("../../asset/images/btn/checkbox_on.gif"); }
+.custom-checkbox {
+  position: relative; }
+  .custom-checkbox label {
+    background: url("../../asset/images/btn/checkbox_off.gif") 0 50% no-repeat; }
+  .custom-checkbox label.on {
+    background-image: url("../../asset/images/btn/checkbox_on.gif"); }
+  .custom-checkbox.ty2 label {
+    height: 20px;
+    line-height: 20px;
+    padding-left: 30px;
+    background: url("../../asset/images/btn/checkbox2_off.gif") 0 50% no-repeat; }
+  .custom-checkbox.ty2 label.on {
+    background-image: url("../../asset/images/btn/checkbox2_on.gif"); }
 
 .custom-radio {
-  font-size: 16px; }
+  font-size: 16px;
+  position: relative; }
   .custom-radio label {
     background: url("../../asset/images/btn/radio_off.png") 0 50% no-repeat; }
   .custom-radio label.on {
@@ -1203,6 +1223,30 @@ textarea {
     height: 30px; }
   .custom-select.active {
     background: url("../../asset/images/btn/ico_selectbox_on.png") 100% 55% no-repeat; }
+  .custom-select.ty2 {
+    height: 28px;
+    line-height: 28px;
+    vertical-align: top;
+    background: #fff url("../../asset/images/btn/ico_selectbox2.gif") 100% 0 no-repeat; }
+    .custom-select.ty2 label {
+      text-align: left;
+      color: #9c9c9c;
+      padding: 0 30px 0 12px;
+      border-color: #d2d3d4; }
+    .custom-select.ty2.active {
+      background-image: url("../../asset/images/btn/ico_selectbox2_on.gif"); }
+  .custom-select.ty3 {
+    height: 28px;
+    line-height: 28px;
+    vertical-align: top;
+    background: #fff url("../../asset/images/btn/ico_selectbox3.gif") 100% 0 no-repeat; }
+    .custom-select.ty3 label {
+      text-align: left;
+      color: #9c9c9c;
+      padding: 0 30px 0 5px;
+      border: none; }
+    .custom-select.ty3.active {
+      background-image: url("../../asset/images/btn/ico_selectbox3_on.gif"); }
 
 .custom-file {
   position: relative;
@@ -3044,5 +3088,125 @@ h1 {
       color: #222;
       font-weight: bold;
       background: #ffd100; }
+
+.reservation-wrap #contents {
+  width: 1150px;
+  margin: 72px auto 150px; }
+.reservation-wrap .col-group {
+  padding-right: 305px;
+  position: relative;
+  min-height: 563px; }
+.reservation-wrap .res-payment-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 260px; }
+.reservation-wrap h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 54px 0 -2px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #9c9c9c; }
+  .reservation-wrap h3:first-child {
+    margin-top: 0; }
+  .reservation-wrap h3 span {
+    font-size: 14px;
+    margin-left: 20px; }
+.reservation-wrap .my-detail-info li {
+  margin-bottom: 2px; }
+.reservation-wrap input[type="text"] {
+  height: 28px;
+  line-height: 28px;
+  border: 1px solid #d2d3d4;
+  background: #f7f7f7;
+  position: relative;
+  top: -1px; }
+.reservation-wrap .custom-select.ty2 {
+  position: relative;
+  top: -1px; }
+.reservation-wrap span.note {
+  font-size: 12px;
+  color: #9c9c9c;
+  margin-left: 10px; }
+.reservation-wrap span.gap {
+  color: #9c9c9c;
+  font-size: 12px;
+  min-width: 5px; }
+.reservation-wrap .textarea-box {
+  border: 1px solid #dcdcdc;
+  border-top: 2px solid #9c9c9c;
+  padding: 27px 26px 3px; }
+  .reservation-wrap .textarea-box textarea {
+    border: 1px solid #d2d3d4;
+    width: 100%;
+    background: #f7f7f7; }
+  .reservation-wrap .textarea-box .word-length {
+    text-align: right;
+    font-size: 12px;
+    color: #9c9c9c; }
+
+.use-agree-box {
+  border: 1px solid #dcdcdc;
+  border-top: 2px solid #9c9c9c; }
+  .use-agree-box .all {
+    padding: 8px 26px 6px; }
+  .use-agree-box ul {
+    border-top: 1px solid #dcdcdc;
+    padding: 5px 26px 19px;
+    overflow: hidden; }
+  .use-agree-box li {
+    float: left;
+    width: 260px;
+    margin-top: 16px; }
+  .use-agree-box .custom-checkbox {
+    margin-right: 2px; }
+  .use-agree-box a {
+    text-decoration: underline; }
+
+.res-payment-info {
+  margin-top: 48px;
+  overflow: hidden; }
+  .res-payment-info dl {
+    border: 5px solid #9c9c9c;
+    padding: 7px; }
+    .res-payment-info dl dt {
+      font-size: 20px;
+      font-weight: bold;
+      color: #fd4741;
+      padding: 4px 15px 3px;
+      border-bottom: 2px solid #9c9c9c; }
+    .res-payment-info dl dd {
+      padding: 16px 15px 14px;
+      line-height: 30px;
+      overflow: hidden; }
+      .res-payment-info dl dd.total {
+        padding: 16px 15px 9px;
+        border-top: 1px solid #9c9c9c; }
+        .res-payment-info dl dd.total p {
+          font-size: 22px; }
+      .res-payment-info dl dd .label {
+        float: left;
+        color: #9c9c9c; }
+      .res-payment-info dl dd p {
+        float: right;
+        text-align: right;
+        color: #222;
+        font-weight: bold; }
+      .res-payment-info dl dd .note {
+        font-size: 12px;
+        color: #9c9c9c; }
+    .res-payment-info dl li {
+      overflow: hidden;
+      letter-spacing: -1px;
+      margin-top: 3px; }
+      .res-payment-info dl li:first-child {
+        margin-top: 0; }
+  .res-payment-info .btn-box {
+    margin-top: 16px; }
+    .res-payment-info .btn-box p {
+      font-size: 12px;
+      color: #9c9c9c;
+      margin-top: 10px;
+      line-height: 1.5; }
 
 /*# sourceMappingURL=common.css.map */

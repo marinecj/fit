@@ -41,10 +41,10 @@
 					<input type="text" id="keyword" maxlength="10" data-placeholder="어떤 스타일의 호텔을 원하세요?" placeholder="어떤 스타일의 호텔을 원하세요?" />
 					<div class="ui-autocomplete-wrap">
 						<div class="other">
-							<span><a href="javascript:region('Oahu');">오하후</a></span>
-							<span><a href="javascript:region('Maui');">마우이</a></span>
-							<span><a href="javascript:region('Big Island');">빅아일랜드</a></span>
-							<span><a href="javascript:region('Kauai');">카우아이</a></span>
+							<span><a href="javascript:region('오하후');">오하후</a></span>
+							<span><a href="javascript:region('마우이');">마우이</a></span>
+							<span><a href="javascript:region('빅아일랜드');">빅아일랜드</a></span>
+							<span><a href="javascript:region('카우아이');">카우아이</a></span>
 						</div>
 					</div>
 				</div>
@@ -147,34 +147,9 @@
 		</div>
 		<div class="goods-list" data-over-ty="1">
 			<ul>
-				<li>
-					<a href="#">
-						<div class="photo-box">
-							<div class="photo"><img src="${Img}/temp/goods_list_photo.jpg" alt="350*300" /></div>
-							<div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
-						</div>
-						<div class="info-box">
-							<div class="t1">[마크업] 힐튼 하와이안 빌리지</div>
-							<div class="t2">[마크업] Hilton Hawaiian Village Waikiki Beach Resort</div>
-							<div class="tag">
-								<span><em class="i1">리조트피 포함</em></span>
-								<span><em class="i2">조식 포함</em></span>
-								<span><em class="i3">5성급 호텔</em></span>
-							</div>
-							<div class="price">
-								<p class="p1"><em>364,478원</em>(20%DC)</p>
-								<p class="p2"><strong>284,478</strong>원</p>
-							</div>
-							<div class="etc">
-								<span>리뷰 <em>56</em>건</span>
-								<span>평점 <em>9.0</em>점</span>
-							</div>
-						</div>
-					</a>
-				</li>
 <c:forEach items="${resultList}" var="result" varStatus="status">
 				<li>
-					<a href="javascript:detail('${result.roomInfo.typeNo}');">
+					<a href="javascript:detail('${result.hotelInfo.hotelNo}');">
 						<div class="photo-box">
 							<div class="photo"><img src="${Img}/temp/goods_list_photo.jpg" alt="350*300" /></div>
 							<div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
@@ -183,13 +158,13 @@
 							<div class="t1">${result.hotelInfo.hotelNmKr}</div>
 							<div class="t2">${result.hotelInfo.hotelNm}</div>
 							<div class="tag">
-								<%--<c:if test="${result.roomInfo.incFeeYn == 'Y'}"><span><em class="i1">리조트피 포함</em></span></c:if>--%>
+								<c:if test="${result.detailInfo.resortfeeYn == 'Y'}"><span><em class="i1">리조트피 포함</em></span></c:if>
 								<c:if test="${result.roomInfo.breakfastYn == 'Y'}"><span><em class="i2">조식 포함</em></span></c:if>
-								<%--<c:if test="${result.hotelInfo.grade == 5}"><span><em class="i3">5성급 호텔</em></span></c:if>--%>
+								<c:if test="${result.detailInfo.grade == '5성급'}"><span><em class="i3">5성급 호텔</em></span></c:if>
 							</div>
 							<div class="price">
-								<%--<p class="p1"><em>${result.roomInfo.fixedPrice}원</em>(20%DC)</p>--%>
-								<p class="p2"><strong>${result.roomInfo.price1}</strong>원</p>
+								<p class="p1"><em><fmt:formatNumber value="${result.roomInfo.price1 * 1.2}" pattern="#,###"/>원</em>(20%DC)</p>
+								<p class="p2"><strong><fmt:formatNumber value="${result.roomInfo.price1}" pattern="#,###"/></strong>원</p>
 							</div>
 							<div class="etc">
 								<span>리뷰 <em>56</em>건</span>
@@ -219,5 +194,47 @@
 <%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
 
 <script>
+	$(document).ready(function () {
+		$("body").scrollTop(0);
+
+		$("#search_submit").click(function() {
+			/*if ($('#keyword').val() == '') {
+			 alert('검색할 키워드를 입력해주세요.');
+			 return false;
+			 }*/
+
+			var htParam = {
+				"keyword" : $('#keyword').val(),
+				"startDate" : $('#startDate').val(),
+				"endDate" : $('#endDate').val(),
+				"adultCnt" : $('#adultCnt').val(),
+				"youthCnt" : $('#youthCnt').val(),
+				"babyCnt" : $('#babyCnt').val(),
+				"totalCnt" : $('#totalCnt').val()
+			};
+
+			_oRequest = $.ajax({
+				type : "POST",
+				url : "/search",
+				cache : false,
+				data : {
+					"json":JSON.stringify(htParam)
+				},
+				error : function(request,status,error) {
+					if (error != "") {
+						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					}
+
+					_oRequest = null;
+				},
+				complete : function(oRes) {
+					console.log(oRes);
+					$("#container").empty();
+					$("#container").html(oRes.responseText);
+				}
+			});
+		});
+	});
+
 	$(".fv-slides ul").bxSlider({speed: 600, auto: true, autoControls:false});
 </script>

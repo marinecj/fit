@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%--<script type="text/javascript" src="${pluginJs}/jquery-1.8.2.js"></script>--%>
-<script type="text/javascript" src="${pluginJs}/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="${pluginJs}/jquery.js"></script>
 <script type="text/javascript" src="${pluginJs}/TweenMax.min.js"></script>
 <script type="text/javascript" src="${pluginJs}/jquery-placeholder.min.js"></script>
 <script type="text/javascript" src="${pluginJs}/jquery-ui.js"></script>
 <script type="text/javascript" src="${pluginJs}/moment.min.js"></script>
 <script type="text/javascript" src="${pluginJs}/jquery.daterangepicker.min.js"></script>
 <script type="text/javascript" src="${pluginJs}/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="${pluginJs}/tooltipsy.min.js"></script>
 
 <script type="text/javascript" src="${Js}/ui.js"></script>
 <script type="text/javascript" src="${Js}/util.js"></script>
@@ -15,47 +16,6 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-
-        $("#search_submit").click(function() {
-            /*if ($('#keyword').val() == '') {
-                alert('검색할 키워드를 입력해주세요.');
-                return false;
-            }*/
-
-            var htParam = {
-                "keyword" : $('#keyword').val(),
-                "startDate" : $('#startDate').val(),
-                "endDate" : $('#endDate').val(),
-                "adultCnt" : $('#adultCnt').val(),
-                "youthCnt" : $('#youthCnt').val(),
-                "babyCnt" : $('#babyCnt').val(),
-                "totalCnt" : $('#totalCnt').val()
-            };
-
-            _oRequest = $.ajax({
-                type : "POST",
-                url : "/search",
-                cache : false,
-                data : {
-                    "json":JSON.stringify(htParam)
-                },
-                error : function(request,status,error) {
-                    if (error != "") {
-                        console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-                    }
-
-                    _oRequest = null;
-                },
-                complete : function(oRes) {
-                    console.log(oRes);
-                    $("#g_loader").empty();
-                    $("#g_loader").html(oRes.responseText);
-                }
-            });
-        });
-    });
-
     function region(regionName) {
         _oRequest = $.ajax({
             url : "/region/" + regionName,
@@ -67,26 +27,26 @@
                 _oRequest = null;
             },
             complete : function(oRes) {
-                $("#g_loader").empty();
-                $("#g_loader").html(oRes.responseText);
+                $("#container").empty();
+                $("#container").html(oRes.responseText);
             }
         });
     }
 
-    function detail(typeNo) {
+    function detail(hotelNo) {
         _oRequest = $.ajax({
             url : "/detail",
             cache : false,
             async: true,
-            data : {"typeNo" : typeNo},
+            data : {"hotelNo" : hotelNo},
             type : "POST",
             error : function() {
                 _oRequest = null;
             },
             complete : function(oRes) {
-                $("#g_loader").empty();
-                $("#g_loader").html(oRes.responseText);
-            }
+                $("#container").empty();
+                $("#container").html(oRes.responseText);
+			}
         });
     }
 
@@ -262,7 +222,7 @@
         var e = document.createElement('script');
         e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
         e.async = true;
-        document.getElementById('fb-root').appendChild(e);
+        //document.getElementById('fb-root').appendChild(e);
     }());
 
 

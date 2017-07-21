@@ -16,7 +16,27 @@
 <title>Fit Hawaii</title>
  
 <link href="${commonCss}" rel="stylesheet" />
-<link href="${depCss}" rel="stylesheet" />
+<%--<link href="${depCss}" rel="stylesheet" />--%>
+<link rel="shortcut icon" type="image/x-icon" href="${Img}/common/favicon.png"/>
+	<style>
+		#loading {
+			width: 100%;
+			height: 100%;
+			top: 0px;
+			left: 0px;
+			position: fixed;
+			display: block;
+			opacity: 0.7;
+			background-color: #fff;
+			z-index: 99;
+			text-align: center; }
+
+		#loading-image {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			z-index: 100; }
+	</style>
 </head>
 
 <body>
@@ -29,10 +49,10 @@
 				<h1><a href="/"><img src="${Img}/layout/logo.png" alt="FITHAWALL" /></a></h1>
 				<div class="gnb">
 					<ul>
-						<li><a href="javascript:region('Oahu');">오하후</a></li>
-						<li><a href="javascript:region('Maui');">마우이</a></li>
-						<li><a href="javascript:region('Big Island');">빅아일랜드</a></li>
-						<li><a href="javascript:region('Kauai');">카우아이</a></li>
+						<li><a href="javascript:region('오하후');">오하후</a></li>
+						<li><a href="javascript:region('마우이');">마우이</a></li>
+						<li><a href="javascript:region('빅아일랜드');">빅아일랜드</a></li>
+						<li><a href="javascript:region('카우아이');">카우아이</a></li>
 					</ul>
 				</div>
 				<div class="util">
@@ -48,12 +68,14 @@
 	</div>
 	<!-- end : Header -->
 
-	<!-- game loader  -->
-	<div id="g_loader"></div>
-	<!-- //game loader -->
+	<!-- container  -->
+	<div id="loading"><img id="loading-image" src="/resources/asset/images/common/loading2.gif" alt="Loading..." /></div>
+	<div id="container" class="main-wrap">
+	</div>
+	<!-- //container -->
 
 	<!-- start : includeFooter -->
-	<div id="includeFooter">
+	<div id="includeFooter" style="display: none;">
 		<div id="footer">
 			<div class="in-wrap">
 				<div class="fo-etc-links">
@@ -317,7 +339,7 @@
 <%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
 
 <script>
-	//document.domain = "fithawaii.com";
+	/*document.domain = "ec2-13-124-92-64.ap-northeast-2.compute.amazonaws.com";*/
 
 	$(document).ready(function () {
 		_oRequest = $.ajax({
@@ -330,12 +352,20 @@
 				_oRequest = null;
 			},
 			complete : function(oRes) {
-				$("#g_loader").empty();
-				$("#g_loader").html(oRes.responseText);
+				$('#loading').show();
+				$("#container").empty();
+				$("#container").html(oRes.responseText);
+				$('#loading').hide();
 			}
 		});
 	});
 
+	$(window).load(function() {
+		$('#loading').hide();
+		//$('#container').show();
+		$('#includeFooter').show();
+		window.scrollTo(0,0);
+	});
 </script>
 
 </body>

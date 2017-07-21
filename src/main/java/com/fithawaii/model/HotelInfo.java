@@ -10,10 +10,6 @@ public class HotelInfo {
 	private String stateKr;
 	private String country;
 
-	private HotelCategoryInfo hotelCategoryInfo;
-
-	private HotelRoomInfo hotelRoomInfo;
-
 	public int getHotelNo() {
 		return hotelNo;
 	}
@@ -68,21 +64,5 @@ public class HotelInfo {
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	public HotelCategoryInfo getHotelCategoryInfo() {
-		return hotelCategoryInfo;
-	}
-
-	public void setHotelCategoryInfo(HotelCategoryInfo hotelCategoryInfo) {
-		this.hotelCategoryInfo = hotelCategoryInfo;
-	}
-
-	public HotelRoomInfo getHotelRoomInfo() {
-		return hotelRoomInfo;
-	}
-
-	public void setHotelRoomInfo(HotelRoomInfo hotelRoomInfo) {
-		this.hotelRoomInfo = hotelRoomInfo;
 	}
 }

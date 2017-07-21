@@ -1,5 +1,7 @@
 package com.fithawaii.model;
 
+import com.fithawaii.util.ExchangeUtil;
+
 public class HotelRoomInfo {
 
 	private int typeNo;
@@ -66,7 +68,7 @@ public class HotelRoomInfo {
 	}
 
 	public void setPrice1(double price1) {
-		this.price1 = price1;
+		this.price1 = ExchangeUtil.exchangeDollaToWon(price1);
 	}
 
 	public double getPrice2() {
@@ -74,7 +76,7 @@ public class HotelRoomInfo {
 	}
 
 	public void setPrice2(double price2) {
-		this.price2 = price2;
+		this.price2 = ExchangeUtil.exchangeDollaToWon(price2);
 	}
 
 	public double getPrice3() {
@@ -82,7 +84,7 @@ public class HotelRoomInfo {
 	}
 
 	public void setPrice3(double price3) {
-		this.price3 = price3;
+		this.price3 = ExchangeUtil.exchangeDollaToWon(price3);
 	}
 
 	public double getPrice4() {
@@ -90,7 +92,7 @@ public class HotelRoomInfo {
 	}
 
 	public void setPrice4(double price4) {
-		this.price4 = price4;
+		this.price4 = ExchangeUtil.exchangeDollaToWon(price4);
 	}
 
 	public String getBreakfastYn() {

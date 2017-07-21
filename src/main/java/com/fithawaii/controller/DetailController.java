@@ -2,6 +2,7 @@ package com.fithawaii.controller;
 
 import com.fithawaii.bo.FitBO;
 import com.fithawaii.model.HotelAllInfo;
+import com.fithawaii.model.HotelDetailInfo;
 import com.fithawaii.model.SearchInfo;
 import com.fithawaii.util.JsonUtils;
 import org.springframework.stereotype.Controller;
@@ -17,14 +18,19 @@ import java.util.List;
 public class DetailController {
 
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
-	public String detail(@RequestParam("typeNo") int typeNo, ModelMap model) {
-		System.out.println("### detail => typeNo : " + typeNo);
+	public String detail(@RequestParam("hotelNo") int hotelNo, ModelMap model) {
+		System.out.println("### detail => hotelNo : " + hotelNo);
 
-		HotelAllInfo hotelDetailInfo = new FitBO().getHotelDetailResult(typeNo);
+		List<HotelAllInfo> hotelAllInfoList = new FitBO().getHotelDetailResult(hotelNo);
 
-		System.out.println("### detail => hotelNo : " + hotelDetailInfo.getHotelInfo().getHotelNo() + ", hotelNm : " + hotelDetailInfo.getHotelInfo().getHotelNm());
+		HotelDetailInfo hotelDetailInfo = new FitBO().getHotelDetailInfo(hotelNo);
 
-		model.addAttribute("result", hotelDetailInfo);
+		System.out.println("### detail => hotelNo : " + hotelAllInfoList.get(0).getHotelInfo().getHotelNo() + ", hotelNm : " +  hotelAllInfoList.get(0).getHotelInfo().getHotelNm()
+				+ ", grade : " +  hotelDetailInfo.getGrade());
+
+		model.addAttribute("hotelAllInfoList", hotelAllInfoList);
+
+		model.addAttribute("detail", hotelDetailInfo);
 
 		return "detail";
 	}

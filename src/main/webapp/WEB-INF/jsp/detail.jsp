@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div class="col2">
-				<h2>${result.hotelInfo.hotelNm}<p>${result.hotelInfo.hotelNm}</p></h2>
+				<h2>${detail.hotelNmKr}<p>${detail.hotelNm}</p></h2>
 				<div class="base-info">
 					<p>75-5660 Palani Road, 카일루아 코나, HI, 96740, 미국</p>
 					<p class="e-list">
@@ -27,7 +27,7 @@
 				</div>
 				<div class="etc-info">
 					<div class="fl">
-						<span class="price"><em>${result.roomInfo.price1}</em>원~</span>
+						<span class="price"><em><fmt:formatNumber value="${hotelAllInfoList[0].roomInfo.price1}" pattern="#,###"/></em>원~</span>
 						<p class="e-list">
 							<span>1일 객실요금</span>
 							<span>부가세, 봉사료를 포함한 가격</span>
@@ -75,26 +75,34 @@
 		<div class="detail-info-sec">
 			<div class="option-info-article">
 				<ul>
+					<%--<c:if test="${detail.breakfastYn == 'Y'}">
 					<li class="ico-opt ty1">
 						<strong>조식포함</strong>
 						<p>호텔에서 제공되는 조식이<br />포함되어 있습니다.</p>
 					</li>
+					</c:if>--%>
+					<c:if test="${detail.resortfeeYn == 'Y'}">
 					<li class="ico-opt ty2">
 						<strong>석식 포함</strong>
 						<p>리조트피(Resort Fee)가<br />포함되어 있습니다.</p>
 					</li>
+					</c:if>
+					<c:if test="${detail.resortfeeYn == 'Y'}">
 					<li class="ico-opt ty3">
 						<strong>리조트피 포함</strong>
 						<p>리조트피(Resort Fee)가<br />포함되어 있습니다.</p>
 					</li>
+					</c:if>
 					<li class="ico-opt ty4">
 						<strong>룸업그레이드</strong>
 						<p>예약하신 룸보다 더 좋은룸으로<br />업그레이드 해드립니다.</p>
 					</li>
+					<c:if test="${detail.valetParkingYn == 'Y'}">
 					<li class="ico-opt ty5">
 						<strong>발렛 파킹</strong>
 						<p>별도의 비용없이 발렛파킹을<br />해드립니다.</p>
 					</li>
+					</c:if>
 				</ul>
 			</div><!--  end : option-info -->
 
@@ -121,180 +129,48 @@
 						</tr>
 						</thead>
 						<tbody>
+<c:forEach var="room" items="${hotelAllInfoList}" varStatus="status">
 						<tr>
-							<td>Two Queen Beds City View (with sofa bed)<br />- Hyatt Rate(2 queen beds request)</td>
+							<td>${room.cateInfo.cateNm}<br>${room.roomInfo.typeNm}</td>
 							<td class="center">
-								<span class="ico breakfast">조식 포함</span>
+								<c:choose>
+								<c:when test="${room.roomInfo.breakfastYn == 'Y'}">
+									<span class="ico breakfast">조식 포함</span>
+								</c:when>
+								<c:otherwise>
+									<span class="ico breakfast off">조식 불포함</span>
+								</c:otherwise>
+								</c:choose>
+								<%--<c:if test="${room.resortfeeYn == 'Y'}">
 								<span class="ico fee">리조트피 포함</span>
+								</c:if>--%>
 							</td>
-							<td>
+							<%--<td>
 								- 발렛파킹 무료<br />
 								- 허니문 특전 : 스페셜 샴페인<br />
 								- 10% 스파서비스 할인권
-							</td>
+							</td>--%>
+							<td>${room.cateInfo.remark}</td>
 							<td class="center">
 								<p class="pt1">즉시확정</p>
-								<a href="#" class="hastip">취소규정</a>
+								<a class="hastip">취소규정</a>
 								<div class="tooltip-text">
 									<span class='pt1'>취소규정</span>
-									<p class="t1">무료취소기한 <span class='pt1'>2016년 07월 15일 16시까지</span></p>
-									<p class="t2">*무료취소기한 이후에 예약을 취소하실 경우<br />1박의 예약취소 위약금을 지불하셔야 합니다.</p>
+									<%--<p class="t1">무료취소기한 <span class='pt1'>2016년 07월 15일 16시까지</span></p>
+									<p class="t2">${room.cateInfo.cancelPolicy}</p>--%>
+									<p class="t1">${room.cateInfo.cancelPolicy}</p>
 								</div>
 							</td>
 							<td>
 								<div class="price">
 									<p class="one-day">1박 기준 객실 요금</p>
-									<p class="nop">550,000원</p>
-									<strong>440,961원</strong>
+									<p class="nop"><fmt:formatNumber value="${room.roomInfo.price1 * 1.2}" pattern="#,###"/>원</p>
+									<strong><fmt:formatNumber value="${room.roomInfo.price1}" pattern="#,###"/>원</strong>
 								</div>
 							</td>
-							<td class="center"><a href="#" class="i-btn bt-real">실시간 예약</a></td>
+							<td class="center"><a href="/shop/booking?typeNo=${room.roomInfo.typeNo}" id="booking" class="i-btn bt-real">실시간 예약</a></td>
 						</tr>
-						<tr>
-							<td>Two Queen Beds City View (with sofa bed)<br />- Hyatt Rate(2 queen beds request)</td>
-							<td class="center">
-								<span class="ico breakfast off">조식 불포함</span>
-								<span class="ico fee off">리조트피 불포함</span>
-							</td>
-							<td>
-								- 발렛파킹 무료<br />
-								- 허니문 특전 : 스페셜 샴페인<br />
-								- 10% 스파서비스 할인권
-							</td>
-							<td class="center">
-								<p class="pt1">즉시확정</p>
-								<a href="#" class="hastip">취소규정</a>
-								<div class="tooltip-text">
-									<span class='pt1'>취소규정</span>
-									<p class="t1">무료취소기한 <span class='pt1'>2016년 07월 15일 16시까지</span></p>
-									<p class="t2">*무료취소기한 이후에 예약을 취소하실 경우<br />1박의 예약취소 위약금을 지불하셔야 합니다.</p>
-								</div>
-							</td>
-							<td>
-								<div class="price">
-									<p class="one-day">1박 기준 객실 요금</p>
-									<p class="nop">550,000원</p>
-									<strong>440,961원</strong>
-								</div>
-							</td>
-							<td class="center"><a href="#" class="i-btn bt-real">실시간 예약</a></td>
-						</tr>
-						<tr>
-							<td>Two Queen Beds City View (with sofa bed)<br />- Hyatt Rate(2 queen beds request)</td>
-							<td class="center">
-								<span class="ico breakfast">조식 포함</span>
-								<span class="ico fee">리조트피 포함</span>
-							</td>
-							<td>
-								- 발렛파킹 무료<br />
-								- 허니문 특전 : 스페셜 샴페인<br />
-								- 10% 스파서비스 할인권
-							</td>
-							<td class="center">
-								<p class="pt1">즉시확정</p>
-								<a href="#" class="hastip">취소규정</a>
-								<div class="tooltip-text">
-									<span class='pt1'>취소규정</span>
-									<p class="t1">무료취소기한 <span class='pt1'>2016년 07월 15일 16시까지</span></p>
-									<p class="t2">*무료취소기한 이후에 예약을 취소하실 경우<br />1박의 예약취소 위약금을 지불하셔야 합니다.</p>
-								</div>
-							</td>
-							<td>
-								<div class="price">
-									<p class="one-day">1박 기준 객실 요금</p>
-									<p class="nop">550,000원</p>
-									<strong>440,961원</strong>
-								</div>
-							</td>
-							<td class="center"><a href="#" class="i-btn bt-real">실시간 예약</a></td>
-						</tr>
-						<tr>
-							<td>Two Queen Beds City View (with sofa bed)<br />- Hyatt Rate(2 queen beds request)</td>
-							<td class="center">
-								<span class="ico breakfast off">조식 불포함</span>
-								<span class="ico fee off">리조트피 불포함</span>
-							</td>
-							<td>
-								- 발렛파킹 무료<br />
-								- 허니문 특전 : 스페셜 샴페인<br />
-								- 10% 스파서비스 할인권
-							</td>
-							<td class="center">
-								<p class="pt1">즉시확정</p>
-								<a href="#" class="hastip">취소규정</a>
-								<div class="tooltip-text">
-									<span class='pt1'>취소규정</span>
-									<p class="t1">무료취소기한 <span class='pt1'>2016년 07월 15일 16시까지</span></p>
-									<p class="t2">*무료취소기한 이후에 예약을 취소하실 경우<br />1박의 예약취소 위약금을 지불하셔야 합니다.</p>
-								</div>
-							</td>
-							<td>
-								<div class="price">
-									<p class="one-day">1박 기준 객실 요금</p>
-									<p class="nop">550,000원</p>
-									<strong>440,961원</strong>
-								</div>
-							</td>
-							<td class="center"><a href="#" class="i-btn bt-real">실시간 예약</a></td>
-						</tr>
-						<tr>
-							<td>Two Queen Beds City View (with sofa bed)<br />- Hyatt Rate(2 queen beds request)</td>
-							<td class="center">
-								<span class="ico breakfast">조식 포함</span>
-								<span class="ico fee">리조트피 포함</span>
-							</td>
-							<td>
-								- 발렛파킹 무료<br />
-								- 허니문 특전 : 스페셜 샴페인<br />
-								- 10% 스파서비스 할인권
-							</td>
-							<td class="center">
-								<p class="pt1">즉시확정</p>
-								<a href="#" class="hastip">취소규정</a>
-								<div class="tooltip-text">
-									<span class='pt1'>취소규정</span>
-									<p class="t1">무료취소기한 <span class='pt1'>2016년 07월 15일 16시까지</span></p>
-									<p class="t2">*무료취소기한 이후에 예약을 취소하실 경우<br />1박의 예약취소 위약금을 지불하셔야 합니다.</p>
-								</div>
-							</td>
-							<td>
-								<div class="price">
-									<p class="one-day">1박 기준 객실 요금</p>
-									<p class="nop">550,000원</p>
-									<strong>440,961원</strong>
-								</div>
-							</td>
-							<td class="center"><a href="#" class="i-btn bt-real">실시간 예약</a></td>
-						</tr>
-						<tr>
-							<td>Two Queen Beds City View (with sofa bed)<br />- Hyatt Rate(2 queen beds request)</td>
-							<td class="center">
-								<span class="ico breakfast off">조식 불포함</span>
-								<span class="ico fee off">리조트피 불포함</span>
-							</td>
-							<td>
-								- 발렛파킹 무료<br />
-								- 허니문 특전 : 스페셜 샴페인<br />
-								- 10% 스파서비스 할인권
-							</td>
-							<td class="center">
-								<p class="pt1">즉시확정</p>
-								<a href="#" class="hastip">취소규정</a>
-								<div class="tooltip-text">
-									<span class='pt1'>취소규정</span>
-									<p class="t1">무료취소기한 <span class='pt1'>2016년 07월 15일 16시까지</span></p>
-									<p class="t2">*무료취소기한 이후에 예약을 취소하실 경우<br />1박의 예약취소 위약금을 지불하셔야 합니다.</p>
-								</div>
-							</td>
-							<td>
-								<div class="price">
-									<p class="one-day">1박 기준 객실 요금</p>
-									<p class="nop">550,000원</p>
-									<strong>440,961원</strong>
-								</div>
-							</td>
-							<td class="center"><a href="#" class="i-btn bt-real">실시간 예약</a></td>
-						</tr>
+</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -776,6 +652,10 @@
 <%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
 
 <script>
+	$(document).ready(function () {
+		$("body").scrollTop(0);
+	});
+
 	$(".detail-slide ul").bxSlider({speed: 600, auto: true, autoControls:false});
 
 	var hpSlider = $('.hp-photo ul').bxSlider({mode: 'fade', speed: 0, auto: false, autoControls:false, controls:false});

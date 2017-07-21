@@ -9,6 +9,7 @@
 		<typeAlias alias="HotelInfo" type="com.fithawaii.model.HotelInfo" />
 		<typeAlias alias="HotelCategoryInfo" type="com.fithawaii.model.HotelCategoryInfo" />
 		<typeAlias alias="HotelRoomInfo" type="com.fithawaii.model.HotelRoomInfo" />
+		<typeAlias alias="HotelDetailInfo" type="com.fithawaii.model.HotelDetailInfo" />
 	</typeAliases>
 
 	<environments default="development">

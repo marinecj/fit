@@ -45,35 +45,69 @@
 		<result property="vaultYn" column="vault_yn" />
 	</resultMap>
 
+	<resultMap id="HotelDetailResult" type="HotelDetailInfo">
+		<result property="hotelNo" column="hotel_no" />
+		<result property="hotelNm" column="hotel_nm" />
+		<result property="hotelNmKr" column="hotel_nm_kr" />
+		<result property="nat" column="nat" />
+		<result property="state" column="state" />
+		<result property="stateKr" column="state_kr" />
+		<result property="country" column="country" />
+		<result property="checkinTime" column="checkin_time" />
+		<result property="checkoutTime" column="checkout_time" />
+		<result property="floor" column="floor" />
+		<result property="roomCnt" column="room_cnt" />
+		<result property="grade" column="grade" />
+		<result property="resortfeeYn" column="resortfee_yn" />
+		<result property="wifiYn" column="wifi_yn" />
+		<result property="babyBedYn" column="baby_bed_yn" />
+		<result property="shuttleYn" column="shuttle_yn" />
+		<result property="freeParkingYn" column="free_parking_yn" />
+		<result property="valetParkingYn" column="valet_parking_yn" />
+		<result property="petYn" column="pet_yn" />
+		<result property="poolYn" column="pool_yn" />
+		<result property="spaYn" column="spa_yn" />
+		<result property="recreations" column="recreations" />
+		<result property="picnicAreaYn" column="picnic_area_yn" />
+		<result property="conferenceRoomYn" column="conference_room_yn" />
+		<result property="kidsClubYn" column="kids_club_yn" />
+		<result property="nurseryYn" column="nursery_yn" />
+		<result property="washerYn" column="washer_yn" />
+		<result property="multiLangStaffYn" column="multi_lang_staff_yn" />
+		<result property="touristAttraction" column="tourist_attraction" />
+	</resultMap>
+
 	<resultMap id="HotelAllInfoResult" type="HotelAllInfo">
-		<association property="hotelInfo" javaType="HotelInfo" resultMap="HotelInfoResult"/>
+		<association property="hotelInfo" javaType="HotelDetailInfo" resultMap="HotelDetailResult"/>
 		<association property="cateInfo" javaType="HotelCategoryInfo" resultMap="HotelCategoryInfoResult"/>
 		<association property="roomInfo" javaType="HotelRoomInfo" resultMap="HotelRoomInfoResult"/>
 	</resultMap>
 
 	<select id="selectHotelRecommendInfo" resultMap="HotelAllInfoResult">
 		SELECT
-			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
-			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
-			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn
+			i.hotel_no, i.hotel_nm, i.hotel_nm_kr, i.nat, i.state, i.state_kr, i.country, MIN(r.price1) as price1, r.breakfast_yn, d.grade, d.resortfee_yn
 		FROM
 			fit_hotel_info i
 				INNER JOIN fit_hotel_rcmd rc ON i.hotel_no = rc.hotel_no AND rc.use_yn = 'Y'
-				INNER JOIN fit_hotel_cate c ON i.hotel_no = c.hotel_no
-				INNER JOIN fit_room_type r ON i.hotel_no = r.hotel_no AND c.cate_no = r.cate_no
+				INNER JOIN fit_room_type r ON i.hotel_no = r.hotel_no
+				INNER JOIN fit_hotel_detail d ON i.hotel_no = d.hotel_no
+		GROUP BY i.hotel_no
 	</select>
 
-	<select id="selectHotelAllInfo" parameterType="map" resultMap="HotelAllInfoResult">
+	<!--<select id="selectHotelAllInfo" parameterType="map" resultMap="HotelAllInfoResult">
 		SELECT
-			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
-			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
-			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn
+		i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+		c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
+		type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn,
+		checkin_time, checkout_time, FLOOR, room_cnt, grade, resortfee_yn, wifi_yn, baby_bed_yn, shuttle_yn, free_parking_yn, valet_parking_yn,
+		pet_yn, pool_yn, spa_yn, recreations, picnic_area_yn, conference_room_yn, kids_club_yn, nursery_yn, washer_yn, multi_lang_staff_yn, tourist_attraction
 		FROM
-			fit_hotel_info i, fit_hotel_cate c, fit_room_type r
+		fit_hotel_info i, fit_hotel_cate c, fit_room_type r, fit_hotel_detail d
 		WHERE
-			i.hotel_no = c.hotel_no
-			AND i.hotel_no = r.hotel_no
-			AND c.cate_no = r.cate_no
+		i.hotel_no = c.hotel_no
+		AND c.hotel_no = r.hotel_no
+		AND c.cate_no = r.cate_no
+		AND i.hotel_no = d.hotel_no
 		<if test="hotelNo != null">
 			AND i.hotel_no = #{hotelNo}
 			<if test="cateNo != null">
@@ -83,40 +117,130 @@
 				</if>
 			</if>
 		</if>
+	</select>-->
+	<select id="selectHotelAllInfo" parameterType="map" resultMap="HotelAllInfoResult">
+		SELECT
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, MIN(r.price1) as price1, r.breakfast_yn, d.grade, d.resortfee_yn
+		FROM
+			fit_hotel_info i, fit_room_type r, fit_hotel_detail d
+		WHERE
+			i.hotel_no = r.hotel_no
+			AND i.hotel_no = d.hotel_no
+		<if test="hotelNo != null">
+			AND i.hotel_no = #{hotelNo}
+			<if test="typeNo != null">
+				AND i.type_no = #{typeNo}
+			</if>
+		</if>
+		GROUP BY i.hotel_no
 	</select>
 
 	<select id="selectHotelSearchResult" parameterType="String" resultMap="HotelAllInfoResult">
 		SELECT
-			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
-			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
-			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, MIN(r.price1) as price1, r.breakfast_yn, d.grade, d.resortfee_yn
 		FROM
-			fit_hotel_info i, fit_hotel_cate c, fit_room_type r
+			fit_hotel_info i, fit_room_type r, fit_hotel_detail d
 		WHERE
-			i.hotel_no = c.hotel_no
-			AND i.hotel_no = r.hotel_no
-			AND c.cate_no = r.cate_no
+			i.hotel_no = r.hotel_no
+			AND i.hotel_no = d.hotel_no
 			AND (
 				hotel_nm LIKE CONCAT('%', #{key}, '%')
 				OR hotel_nm_kr LIKE CONCAT('%', #{key}, '%')
 				OR state LIKE CONCAT('%', #{key}, '%')
 				OR state_kr LIKE CONCAT('%', #{key}, '%')
 			)
+		GROUP BY i.hotel_no
 	</select>
 
 	<select id="selectHotelDetailResult" parameterType="int" resultMap="HotelAllInfoResult">
 		SELECT
 			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
 			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
-			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn
+			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn,
+			checkin_time, checkout_time, FLOOR, room_cnt, grade, resortfee_yn, wifi_yn, baby_bed_yn, shuttle_yn, free_parking_yn, valet_parking_yn,
+			pet_yn, pool_yn, spa_yn, recreations, picnic_area_yn, conference_room_yn, kids_club_yn, nursery_yn, washer_yn, multi_lang_staff_yn, tourist_attraction
 		FROM
-			fit_hotel_info i, fit_hotel_cate c, fit_room_type r
+			fit_hotel_info i, fit_hotel_cate c, fit_room_type r, fit_hotel_detail d
 		WHERE
 			i.hotel_no = c.hotel_no
-			AND i.hotel_no = r.hotel_no
+			AND c.hotel_no = r.hotel_no
 			AND c.cate_no = r.cate_no
+			AND i.hotel_no = d.hotel_no
+			AND i.hotel_no = #{hotelNo}
+	</select>
+
+	<select id="selectHotelDetailResultByTypeNo" parameterType="int" resultMap="HotelAllInfoResult">
+		SELECT
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
+			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn,
+			checkin_time, checkout_time, FLOOR, room_cnt, grade, resortfee_yn, wifi_yn, baby_bed_yn, shuttle_yn, free_parking_yn, valet_parking_yn,
+			pet_yn, pool_yn, spa_yn, recreations, picnic_area_yn, conference_room_yn, kids_club_yn, nursery_yn, washer_yn, multi_lang_staff_yn, tourist_attraction
+		FROM
+			fit_hotel_info i, fit_hotel_cate c, fit_room_type r, fit_hotel_detail d
+		WHERE
+			i.hotel_no = c.hotel_no
+			AND c.hotel_no = r.hotel_no
+			AND c.cate_no = r.cate_no
+			AND i.hotel_no = d.hotel_no
 			AND r.type_no = #{typeNo}
 	</select>
+
+	<select id="selectHotelDetailInfo" resultMap="HotelDetailResult">
+		SELECT
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+			checkin_time, checkout_time, floor, room_cnt, grade, resortfee_yn, wifi_yn, baby_bed_yn, shuttle_yn, free_parking_yn, valet_parking_yn,
+			pet_yn, pool_yn, spa_yn, recreations, picnic_area_yn, conference_room_yn, kids_club_yn, nursery_yn, washer_yn, multi_lang_staff_yn, tourist_attraction
+		FROM
+			fit_hotel_info i, fit_hotel_detail d
+		WHERE
+			i.hotel_no = d.hotel_no
+			AND i.hotel_no = #{hotelNo}
+	</select>
+
+	<select id="selectHotelInfoByName" resultMap="HotelInfoResult">
+		SELECT
+			hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country
+		FROM
+			fit_hotel_info
+		WHERE
+			hotel_nm like '%#{hotelNm}%'
+	</select>
+
+	<insert id="truncateHotelCategory">
+		TRUNCATE fit_hotel_cate
+	</insert>
+
+	<insert id="truncateHotelRoom">
+		TRUNCATE fit_room_type
+	</insert>
+
+	<insert id="insertHotelCategoryInfo" parameterType="map">
+		INSERT INTO fit_hotel_cate
+			(cate_no, hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy)
+		VALUES
+			(
+			<foreach item="item" index="index" collection="hotelCategoryInfoList" open="" separator="),(" close="">
+				#{item.cateNo}, #{item.hotelNo}, #{item.cateNm},
+				#{item.duration1}, #{item.duration2}, #{item.duration3}, #{item.duration4},
+				#{item.remark}, #{item.cancelPolicy}
+			</foreach>
+			)
+	</insert>
+
+	<insert id="insertHotelRoomInfo" parameterType="map">
+		INSERT INTO fit_room_type
+			(type_no, hotel_no, cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn)
+		VALUES
+			(
+			<foreach item="item" index="index" collection="hotelRoomInfoList" open="" separator="),(" close="">
+				#{item.typeNo}, #{item.hotelNo}, #{item.cateNo}, #{item.typeNm}, #{item.agencyCd},
+				#{item.price1}, #{item.price2}, #{item.price3}, #{item.price4},
+				#{item.breakfastYn}, #{item.breakfastPrice},
+				#{item.cotPrice}, #{item.cradleYn}, #{item.acYn}, #{item.fridgeYn}, #{item.bathYn}, #{item.gardenYn}, #{item.vaultYn}
+			</foreach>
+			)
+	</insert>
 
 	<resultMap id="resultFitMap" type="Fit">
 		<result property="test1" column="test1" />

@@ -323,12 +323,12 @@ ui.detailView = (function(){
       selectForward: true,
       separator : ' to ',
       getValue: function(){
-        if ($('.startDate').val() && $('.endDate').val()) {return $('.startDate').val() + ' to ' + $('.endDate').val();}
+        if ($('.date-range1').val() && $('.date-range2').val()) {return $('.date-range1').val() + ' to ' + $('.date-range2').val();}
         else {return '';}
       },
       setValue: function(s,s1,s2){
-        $('.startDate').val(s1);
-        $('.endDate').val(s2);
+        $('.date-range1').val(s1);
+        $('.date-range2').val(s2);
       }
     }).bind('datepicker-change', function(){
       objDataLayer.hide();

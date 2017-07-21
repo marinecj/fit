@@ -1,12 +1,14 @@
 package com.fithawaii.shop.controller;
 
 import com.fithawaii.bo.FitBO;
+import com.fithawaii.model.HotelAllInfo;
 import com.fithawaii.model.ShopInfo;
 import com.fithawaii.util.JsonUtils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,19 +52,29 @@ public class ShopController {
 	//"P", "M" 외의 문자(Null, "" 포함)는 모바일 또는 PC 여부를 체크하지 않음
 	//private String LGD_ACTIVEXYN		= "N";													//계좌이체 결제시 사용, ActiveX 사용 여부로 "N" 이외의 값: ActiveX 환경에서 계좌이체 결제 진행(IE)
 
+	private String SERVER_URL			= "http://ec2-13-124-92-64.ap-northeast-2.compute.amazonaws.com:8080";
+	//private String SERVER_URL			= "http://localhost:8080";
 
 	/*
 	 * 가상계좌(무통장) 결제 연동을 하시는 경우 아래 LGD_CASNOTEURL 을 설정하여 주시기 바랍니다.
 	 */
-	private String LGD_CASNOTEURL		= "http://fithawaii.com/shop/cas_noteurl";
+	private String LGD_CASNOTEURL		= SERVER_URL + "/shop/cas_noteurl";
 
 	/*
 	 * LGD_RETURNURL 을 설정하여 주시기 바랍니다. 반드시 현재 페이지와 동일한 프로트콜 및  호스트이어야 합니다. 아래 부분을 반드시 수정하십시요.
 	 */
-	//private String LGD_RETURNURL		= "http://fithawaii.com/shop/returnurl";// FOR MANUAL
-	private String LGD_RETURNURL		= "http://localhost:8080/shop/returnurl";// FOR MANUAL
+	private String LGD_RETURNURL		= SERVER_URL + "/shop/returnurl";// FOR MANUAL
 
+	@RequestMapping(value = "/booking", method = RequestMethod.GET)
+	public String booking(@RequestParam("typeNo") int typeNo, ModelMap model) {
+		System.out.println("### booking => typeNo : " + typeNo);
 
+		HotelAllInfo hotelAllInfo = new FitBO().getHotelDetailResultByTypeNo(typeNo);
+
+		model.addAttribute("hotelAllInfo", hotelAllInfo);
+
+		return "shop/booking";
+	}
 	@RequestMapping(value = "/sample_crossplatform", method = RequestMethod.GET)
 	public String sample_crossplatform(ModelMap model) throws Exception {
 		return "shop/sample_crossplatform";

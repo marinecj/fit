@@ -2,6 +2,7 @@ package com.fithawaii.controller;
 
 import com.fithawaii.bo.FitBO;
 import com.fithawaii.model.Fit;
+import com.fithawaii.model.HotelAllInfo;
 import com.fithawaii.model.HotelInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
