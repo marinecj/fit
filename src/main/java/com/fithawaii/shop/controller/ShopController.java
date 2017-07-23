@@ -292,8 +292,8 @@ public class ShopController {
 		* 예) [Window 계열] C:\inetpub\wwwroot\lgdacom ==> 절대불가(웹 디렉토리)
 		*/
 
-		//String configPath = "/resources/lgdacom";  //LG유플러스에서 제공한 환경파일("/conf/lgdacom.conf,/conf/mall.conf") 위치 지정.
-		String configPath = "J:\\dev\\IntellijProjects\\fit\\src\\main\\webapp\\resources\\lgdacom";  //local
+		String configPath = "/resources/lgdacom";  //LG유플러스에서 제공한 환경파일("/conf/lgdacom.conf,/conf/mall.conf") 위치 지정.
+		//String configPath = "J:\\dev\\IntellijProjects\\fit\\src\\main\\webapp\\resources\\lgdacom";  //local
 
 		/*
 		 *************************************************
