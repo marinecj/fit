@@ -364,7 +364,6 @@
 		$('#loading').hide();
 		//$('#container').show();
 		$('#includeFooter').show();
-		window.scrollTo(0,0);
 	});
 </script>
 

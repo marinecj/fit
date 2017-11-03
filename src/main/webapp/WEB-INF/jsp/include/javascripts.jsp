@@ -16,7 +16,11 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <script type="text/javascript">
-    function region(regionName) {
+	$(document).ready(function () {
+		$(window).scrollTop(0);
+	});
+
+	function region(regionName) {
         _oRequest = $.ajax({
             url : "/region/" + regionName,
             cache : false,
@@ -40,6 +44,23 @@
             async: true,
             data : {"hotelNo" : hotelNo},
             type : "POST",
+            error : function() {
+                _oRequest = null;
+            },
+            complete : function(oRes) {
+                $("#container").empty();
+                $("#container").html(oRes.responseText);
+			}
+        });
+    }
+
+    function shop(typeNo) {
+        _oRequest = $.ajax({
+            url : "/shop/booking",
+            cache : false,
+            async: true,
+            data : {"typeNo" : typeNo},
+            type : "GET",
             error : function() {
                 _oRequest = null;
             },

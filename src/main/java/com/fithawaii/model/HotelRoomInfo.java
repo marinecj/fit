@@ -13,6 +13,10 @@ public class HotelRoomInfo {
 	private double price2;
 	private double price3;
 	private double price4;
+	private double price1Won;
+	private double price2Won;
+	private double price3Won;
+	private double price4Won;
 	private String breakfastYn;
 	private String breakfastPrice;
 	private double cotPrice;
@@ -68,7 +72,8 @@ public class HotelRoomInfo {
 	}
 
 	public void setPrice1(double price1) {
-		this.price1 = ExchangeUtil.exchangeDollaToWon(price1);
+		this.price1 = price1;
+		this.price1Won = ExchangeUtil.exchangeDollaToWon(price1);
 	}
 
 	public double getPrice2() {
@@ -76,7 +81,8 @@ public class HotelRoomInfo {
 	}
 
 	public void setPrice2(double price2) {
-		this.price2 = ExchangeUtil.exchangeDollaToWon(price2);
+		this.price2 = price2;
+		this.price2Won = ExchangeUtil.exchangeDollaToWon(price2);
 	}
 
 	public double getPrice3() {
@@ -84,7 +90,8 @@ public class HotelRoomInfo {
 	}
 
 	public void setPrice3(double price3) {
-		this.price3 = ExchangeUtil.exchangeDollaToWon(price3);
+		this.price3 = price3;
+		this.price3Won = ExchangeUtil.exchangeDollaToWon(price3);
 	}
 
 	public double getPrice4() {
@@ -92,7 +99,40 @@ public class HotelRoomInfo {
 	}
 
 	public void setPrice4(double price4) {
-		this.price4 = ExchangeUtil.exchangeDollaToWon(price4);
+		this.price4 = price4;
+		this.price4Won = ExchangeUtil.exchangeDollaToWon(price4);
+	}
+
+	public double getPrice1Won() {
+		return price1Won;
+	}
+
+	public void setPrice1Won(double price1Won) {
+		this.price1Won = price1Won;
+	}
+
+	public double getPrice2Won() {
+		return price2Won;
+	}
+
+	public void setPrice2Won(double price2Won) {
+		this.price2Won = price2Won;
+	}
+
+	public double getPrice3Won() {
+		return price3Won;
+	}
+
+	public void setPrice3Won(double price3Won) {
+		this.price3Won = price3Won;
+	}
+
+	public double getPrice4Won() {
+		return price4Won;
+	}
+
+	public void setPrice4Won(double price4Won) {
+		this.price4Won = price4Won;
 	}
 
 	public String getBreakfastYn() {

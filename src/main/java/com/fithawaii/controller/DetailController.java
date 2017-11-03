@@ -25,8 +25,12 @@ public class DetailController {
 
 		HotelDetailInfo hotelDetailInfo = new FitBO().getHotelDetailInfo(hotelNo);
 
-		System.out.println("### detail => hotelNo : " + hotelAllInfoList.get(0).getHotelInfo().getHotelNo() + ", hotelNm : " +  hotelAllInfoList.get(0).getHotelInfo().getHotelNm()
-				+ ", grade : " +  hotelDetailInfo.getGrade());
+		if (hotelAllInfoList.size() > 0 && hotelDetailInfo != null) {
+			System.out.println(
+					"### detail => hotelNo : " + hotelAllInfoList.get(0).getHotelInfo().getHotelNo() + ", hotelNm : " + hotelAllInfoList.get(0)
+							.getHotelInfo().getHotelNm()
+							+ ", grade : " + hotelDetailInfo.getGrade());
+		}
 
 		model.addAttribute("hotelAllInfoList", hotelAllInfoList);
 

@@ -27,7 +27,7 @@
 				</div>
 				<div class="etc-info">
 					<div class="fl">
-						<span class="price"><em><fmt:formatNumber value="${hotelAllInfoList[0].roomInfo.price1}" pattern="#,###"/></em>원~</span>
+						<span class="price"><em><fmt:formatNumber value="${hotelAllInfoList[0].roomInfo.price1Won}" pattern="#,###"/></em>원~</span>
 						<p class="e-list">
 							<span>1일 객실요금</span>
 							<span>부가세, 봉사료를 포함한 가격</span>
@@ -164,11 +164,11 @@
 							<td>
 								<div class="price">
 									<p class="one-day">1박 기준 객실 요금</p>
-									<p class="nop"><fmt:formatNumber value="${room.roomInfo.price1 * 1.2}" pattern="#,###"/>원</p>
-									<strong><fmt:formatNumber value="${room.roomInfo.price1}" pattern="#,###"/>원</strong>
+									<p class="nop"><fmt:formatNumber value="${room.roomInfo.price1Won * 1.2}" pattern="#,###"/>원</p>
+									<strong><fmt:formatNumber value="${room.roomInfo.price1Won}" pattern="#,###"/>원</strong>
 								</div>
 							</td>
-							<td class="center"><a href="/shop/booking?typeNo=${room.roomInfo.typeNo}" id="booking" class="i-btn bt-real">실시간 예약</a></td>
+							<td class="center"><a href="javascript:shop(${room.roomInfo.typeNo});" id="booking" class="i-btn bt-real">실시간 예약</a></td>
 						</tr>
 </c:forEach>
 						</tbody>
@@ -652,10 +652,6 @@
 <%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
 
 <script>
-	$(document).ready(function () {
-		$("body").scrollTop(0);
-	});
-
 	$(".detail-slide ul").bxSlider({speed: 600, auto: true, autoControls:false});
 
 	var hpSlider = $('.hp-photo ul').bxSlider({mode: 'fade', speed: 0, auto: false, autoControls:false, controls:false});

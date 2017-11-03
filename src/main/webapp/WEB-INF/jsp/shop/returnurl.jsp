@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
 	<script type="text/javascript">
 
@@ -18,10 +20,10 @@
 	</script>
 </head>
 <body onload="setLGDResult()">
-<p><h1>RETURN_URL (ÀÎÁõ°á°ú)</h1></p>
+<p><h1>RETURN_URL (ì¸ì¦ê²°ê³¼)</h1></p>
 <div>
-	<p>LGD_RESPCODE (°á°úÄÚµå) : <c:out value="${PAYREQ_MAP.LGD_RESPCODE}"/></p>
-	<p>LGD_RESPMSG (°á°ú¸Þ½ÃÁö): <c:out value="${PAYREQ_MAP.LGD_RESPMSG}"/></p>
+	<p>LGD_RESPCODE (ê²°ê³¼ì½”ë“œ) : <c:out value="${PAYREQ_MAP.LGD_RESPCODE}"/></p>
+	<p>LGD_RESPMSG (ê²°ê³¼ë©”ì‹œì§€): <c:out value="${PAYREQ_MAP.LGD_RESPMSG}"/></p>
 	<form method="post" name="LGD_RETURNINFO" id="LGD_RETURNINFO">
 		<c:forEach items="${PAYREQ_MAP}" var="payReqMap" varStatus="status">
 			<input type='hidden' name='${payReqMap.key}' id='${payReqMap.key}' value='${payReqMap.value}'>

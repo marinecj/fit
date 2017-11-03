@@ -9,6 +9,9 @@ public class HotelInfo {
 	private String state;
 	private String stateKr;
 	private String country;
+	private String hotelAddress;
+	private String hotelTel;
+	private String hotelUrl;
 
 	public int getHotelNo() {
 		return hotelNo;
@@ -64,5 +67,29 @@ public class HotelInfo {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getHotelAddress() {
+		return hotelAddress;
+	}
+
+	public void setHotelAddress(String hotelAddress) {
+		this.hotelAddress = hotelAddress;
+	}
+
+	public String getHotelTel() {
+		return hotelTel;
+	}
+
+	public void setHotelTel(String hotelTel) {
+		this.hotelTel = hotelTel;
+	}
+
+	public String getHotelUrl() {
+		return hotelUrl;
+	}
+
+	public void setHotelUrl(String hotelUrl) {
+		this.hotelUrl = hotelUrl;
 	}
 }

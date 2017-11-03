@@ -132,8 +132,8 @@
 									<c:if test="${result.detailInfo.grade == '5성급'}"><span><em class="i3">5성급 호텔</em></span></c:if>
 								</div>
 								<div class="price">
-									<p class="p1"><em><fmt:formatNumber value="${result.roomInfo.price1 * 1.2}" pattern="#,###"/>원</em>(20%DC)</p>
-									<p class="p2"><strong><fmt:formatNumber value="${result.roomInfo.price1}" pattern="#,###"/></strong>원</p>
+									<p class="p1"><em><fmt:formatNumber value="${result.roomInfo.price1Won * 1.2}" pattern="#,###"/>원</em>(20%DC)</p>
+									<p class="p2"><strong><fmt:formatNumber value="${result.roomInfo.price1Won}" pattern="#,###"/></strong>원</p>
 								</div>
 								<div class="etc">
 									<span>리뷰 <em>56</em>건</span>
@@ -161,14 +161,28 @@
 		</div><!-- end : #contents -->
 	</div><!-- end : #container -->
 
-	<div class="map-wrap">지도앱 작업</div>
+	<div id="map"<%-- class="map-wrap"--%>></div>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC13Gq6zInR7gY_OdFsmc3zySocZeU3sus&callback=initMap"></script>
+<style>
+	/* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+	#map {
+		top: 55px;
+		height: 100%;
+	}
+	/* Optional: Makes the sample page fill the window.
+	html, body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	} */
+</style>
+
 
 <%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
 
 <script>
 	$(document).ready(function () {
-		$("body").scrollTop(0);
-
 		$("#search_submit").click(function() {
 			/*if ($('#keyword').val() == '') {
 			 alert('검색할 키워드를 입력해주세요.');
@@ -211,4 +225,33 @@
 	ui.rangeSlider(231560, 3541650);
 	$("#slider-range" ).on("slidechange", function(event, ui) {console.log(2)});
 	ui.mapSize();
+
+	function initMap() {
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 8,
+			center: {lat: -34.397, lng: 150.644}
+		});
+		var geocoder = new google.maps.Geocoder();
+
+		//document.getElementById('submit').addEventListener('click', function() {
+			geocodeAddress(geocoder, map);
+		//});
+	}
+
+	function geocodeAddress(geocoder, resultsMap) {
+		//var address = document.getElementById('address').value;
+		<%-- var address = "${resultList.get(0).hotelInfo.hotelAddress}"; --%>
+		var address = "5000 Kahala Ave, Honolulu, HI 96816";
+		geocoder.geocode({'address': address}, function(results, status) {
+			if (status === 'OK') {
+				resultsMap.setCenter(results[0].geometry.location);
+				var marker = new google.maps.Marker({
+					map: resultsMap,
+					position: results[0].geometry.location
+				});
+			} else {
+				alert('Geocode was not successful for the following reason: ' + status);
+			}
+		});
+	}
 </script>

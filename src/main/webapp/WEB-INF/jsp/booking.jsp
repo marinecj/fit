@@ -2,8 +2,9 @@
 <%@ include file="/WEB-INF/jsp/include/taglibs.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/urls.jsp" %>
 
-	<div id="contents">
+<div id="contents">
 
+	<form method="post" id="LGD_PAYINFO" action="/shop/payreq">
 		<div class="col-group">
 			<div class="res-payment-info">
 				<dl>
@@ -18,11 +19,11 @@
 						</ul>
 					</dd>
 					<dd class="total">
-						<span class="label">총 결제 금액</span><p class="pt1"><fmt:formatNumber value="${hotelAllInfo.roomInfo.price1}"  pattern="0"/>원</p>
+						<span class="label">총 결제 금액</span><p class="pt1"><fmt:formatNumber value="${hotelAllInfo.roomInfo.price1Won}"  pattern="0"/>원</p>
 					</dd>
 				</dl>
 				<div class="btn-box">
-					<a href="#" class="i-btn bt-payment">결재하기</a>
+					<a href="<%--javascript:doPay();--%>#" id="buy_submit" class="i-btn bt-payment">결재하기</a>
 					<p>총 결제 금액에는 객실+세금+봉사료+기타 할인이 포함되어 있습니다.</p>
 				</div>
 			</div><!-- end : .left-menu -->
@@ -38,8 +39,8 @@
 					</div>
 					<div class="item">
 						<span class="label">호텔 주소</span>
-						<p>75-5660 Palani Road, 카일루아 코나, HI, 96740, 미국</p>
-						<p>TEL : + 808 661 0031    FAX : + 808 661 0031    426객실</p>
+						<p>${hotelAllInfo.hotelInfo.hotelAddress}</p>
+						<p>TEL : ${hotelAllInfo.hotelInfo.hotelTel}</p>    <p>${hotelAllInfo.hotelInfo.roomCnt}객실</p>
 					</div>
 				</div>
 
@@ -81,12 +82,12 @@
 						<tbody>
 						<tr>
 							<th>아이디</th>
-							<td><input type="text" placeholder="입력해주세요" style="width: 234px;" /></td>
+							<td><input type="text" name="LGD_BUYER" id="LGD_BUYER" placeholder="입력해주세요" style="width: 234px;" /></td>
 						</tr>
 						<tr>
 							<th>이메일</th>
 							<td>
-								<input type="text" placeholder="입력해주세요" style="width: 234px;" />
+								<input type="text" name="LGD_BUYEREMAIL" id="LGD_BUYEREMAIL" placeholder="입력해주세요" style="width: 234px;" />
 								<span class="note">* 이 이메일로 예약 확정 및 해당 일정에 대한 안내를 제공합니다.</span>
 							</td>
 						</tr>
@@ -236,16 +237,50 @@
 			</div><!-- end : .con-section -->
 		</div><!-- end : .col-group -->
 
-	</div><!-- end : #contents -->
+		<input type="hidden" name="CST_MID" id="CST_MID" value="fithawaii"/>
+		<input type="hidden" name="CST_PLATFORM" id="CST_PLATFORM" value="test"/>
+		<input type="hidden" name="LGD_PRODUCTINFO" id="LGD_PRODUCTINFO" value="${hotelAllInfo.hotelInfo.hotelNmKr}"/>
+		<input type="hidden" name="LGD_AMOUNT" id="LGD_AMOUNT" value="<fmt:formatNumber value="${hotelAllInfo.roomInfo.price1Won}"  pattern="0"/>"/>
+		<input type="hidden" name="LGD_TIMESTAMP" id="LGD_TIMESTAMP" value="1234567890"/>
+		<input type="hidden" name="LGD_OID" id="LGD_OID" value="test_1234567890020"/>
+		<%--<select name="LGD_CUSTOM_USABLEPAY" id="LGD_CUSTOM_USABLEPAY">
+			<option value="SC0010">신용카드</option>
+			<option value="SC0030">계좌이체</option>
+			<option value="SC0040">무통장입금</option>
+			<option value="SC0060">휴대폰</option>
+			<option value="SC0070">유선전화결제</option>
+			<option value="SC0090">OK캐쉬백</option>
+			<option value="SC0111">문화상품권</option>
+			<option value="SC0112">게임문화상품권</option>
+		</select>--%>
+		<input type="hidden" name="LGD_CUSTOM_USABLEPAY" id="LGD_CUSTOM_USABLEPAY" value="SC0010"/>
+		<input type="hidden" name="LGD_WINDOW_TYPE" id="LGD_WINDOW_TYPE" value="iframe"/>
+		<input type="hidden" name="LGD_CUSTOM_SWITCHINGTYPE" id="LGD_CUSTOM_SWITCHINGTYPE" value="IFRAME"/>
 
-<div class="map-wrap">지도앱 작업</div>
+		<input type="hidden" name="LGD_MID" id="LGD_MID" value=""/>
+		<input type="hidden" name="LGD_CUSTOM_SKIN" id="LGD_CUSTOM_SKIN" value=""/>
+		<input type="hidden" name="LGD_CUSTOM_PROCESSTYPE" id="LGD_CUSTOM_PROCESSTYPE" value=""/>
+		<input type="hidden" name="LGD_HASHDATA" id="LGD_HASHDATA" value=""/>
+		<input type="hidden" name="LGD_RETURNURL" id="LGD_RETURNURL" value=""/>
+		<input type="hidden" name="LGD_WINDOW_VER" id="LGD_WINDOW_VER" value=""/>
+		<input type="hidden" name="LGD_OSTYPE_CHECK" id="LGD_OSTYPE_CHECK" value=""/>
+		<input type="hidden" name="LGD_VERSION" id="LGD_VERSION" value=""/>
+		<input type="hidden" name="LGD_CASNOTEURL" id="LGD_CASNOTEURL" value=""/>
+		<input type="hidden" name="LGD_RESPCODE" id="LGD_RESPCODE" value=""/>
+		<input type="hidden" name="LGD_RESPMSG" id="LGD_RESPMSG" value=""/>
+		<input type="hidden" name="LGD_PAYKEY" id="LGD_PAYKEY" value=""/>
+		<input type="hidden" name="LGD_ENCODING" value="UTF-8">
+		<input type="hidden" name="LGD_ENCODING_NOTEURL"  value="UTF-8">
+		<input type="hidden" name="LGD_ENCODING_RETURNURL"  value="UTF-8">
+	</form>
+
+</div><!-- end : #contents -->
 
 <%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
 
-<script>
+<script language="javascript" src="http://xpay.uplus.co.kr/xpay/js/xpay_crossplatform.js" type="text/javascript"></script>
+<script type="text/javascript">
 	$(document).ready(function () {
-		$("body").scrollTop(0);
-
 		var floatPosition = parseInt($(".res-payment-info").css('top'));
 		var h = $("#contents").offset().top +$("#contents").height()-$(".res-payment-info").height()-118;
 		$(window).scroll(function() {
@@ -254,5 +289,152 @@
 			if(newPosition>h){newPosition = h;}else if(newPosition<0){newPosition = 0;}
 			$(".res-payment-info").stop().animate({"top" : newPosition + "px"}, 300);
 		}).scroll();
+
+		$("#buy_submit").click(function() {
+			if ($('#LGD_BUYER').val() == '') {
+				alert('이름을 입력해주세요.');
+				return false;
+			}
+			if ($('#LGD_BUYEREMAIL').val() == '') {
+				alert('이메일을 입력해주세요.');
+				return false;
+			}
+
+			// OID, TIMESTAMP 생성
+			makeoid();
+
+			_oRequest = $.ajax({
+				type : "POST",
+				url : "/shop/payreq",
+				cache : false,
+				data : {
+					"LGD_OID" : $('#LGD_OID').val(),
+					"LGD_AMOUNT" : $('#LGD_AMOUNT').val(),
+					"LGD_TIMESTAMP" : $('#LGD_TIMESTAMP').val()
+				},
+				error : function(request,status,error) {
+					if (error != "") {
+						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					}
+
+					_oRequest = null;
+				},
+				complete : function(oRes) {
+					var payReqMap = JSON.parse(oRes.responseText);
+
+					console.log("payreq - LGD_MID : " + payReqMap.LGD_MID);
+					console.log("payreq - LGD_OID : " + payReqMap.LGD_OID);
+					console.log("payreq - LGD_PRODUCTINFO : " + $('#LGD_PRODUCTINFO').val());
+					console.log("payreq - LGD_CUSTOM_SKIN : " + payReqMap.LGD_CUSTOM_SKIN);
+					console.log("payreq - LGD_CUSTOM_PROCESSTYPE : " + payReqMap.LGD_CUSTOM_PROCESSTYPE);
+					console.log("payreq - LGD_HASHDATA : " + payReqMap.LGD_HASHDATA);
+					console.log("payreq - LGD_RETURNURL : " + payReqMap.LGD_RETURNURL);
+					console.log("payreq - LGD_WINDOW_VER : " + payReqMap.LGD_WINDOW_VER);
+					console.log("payreq - LGD_OSTYPE_CHECK : " + payReqMap.LGD_OSTYPE_CHECK);
+					console.log("payreq - LGD_VERSION : " + payReqMap.LGD_VERSION);
+					console.log("payreq - LGD_CASNOTEURL : " + payReqMap.LGD_CASNOTEURL);
+					console.log("payreq - LGD_RESPCODE : " + payReqMap.LGD_RESPCODE);
+					console.log("payreq - LGD_RESPMSG : " + payReqMap.LGD_RESPMSG);
+					console.log("payreq - LGD_PAYKEY : " + payReqMap.LGD_PAYKEY);
+
+					$('#LGD_MID').val(payReqMap.LGD_MID);
+					//$('#LGD_OID').val(payReqMap.LGD_OID);
+					$('#LGD_CUSTOM_SKIN').val(payReqMap.LGD_CUSTOM_SKIN);
+					$('#LGD_CUSTOM_PROCESSTYPE').val(payReqMap.LGD_CUSTOM_PROCESSTYPE);
+					$('#LGD_HASHDATA').val(payReqMap.LGD_HASHDATA);
+					$('#LGD_RETURNURL').val(payReqMap.LGD_RETURNURL);
+					$('#LGD_WINDOW_VER').val(payReqMap.LGD_WINDOW_VER);
+					$('#LGD_OSTYPE_CHECK').val(payReqMap.LGD_OSTYPE_CHECK);
+					$('#LGD_VERSION').val(payReqMap.LGD_VERSION);
+					$('#LGD_CASNOTEURL').val(payReqMap.LGD_CASNOTEURL);
+					$('#LGD_RESPCODE').val(payReqMap.LGD_RESPCODE);
+					$('#LGD_RESPMSG').val(payReqMap.LGD_RESPMSG);
+					$('#LGD_PAYKEY').val(payReqMap.LGD_PAYKEY);
+
+
+					// 인증요청
+					launchCrossPlatform();
+				}
+			});
+		});
 	});
+
+	function LPad(digit, size, attatch) {
+		var add = "";
+		digit = digit.toString();
+
+		if (digit.length < size) {
+			var len = size - digit.length;
+			for (i = 0; i < len; i++) {
+				add += attatch;
+			}
+		}
+		return add + digit;
+	}
+
+	function makeoid() {
+		var now = new Date();
+		var years = now.getFullYear();
+		var months = LPad(now.getMonth() + 1, 2, "0");
+		var dates = LPad(now.getDate(), 2, "0");
+		var hours = LPad(now.getHours(), 2, "0");
+		var minutes = LPad(now.getMinutes(), 2, "0");
+		var seconds = LPad(now.getSeconds(), 2, "0");
+		var timeValue = years + months + dates + hours + minutes + seconds;
+		document.getElementById("LGD_OID").value = "test_" + timeValue;
+		document.getElementById("LGD_TIMESTAMP").value = timeValue;
+	}
+
+	/*
+     * 인증요청 처리
+     */
+	function doPay() {
+		// OID, TIMESTAMP 생성
+		makeoid();
+		// 결제창 호출
+		document.getElementById("LGD_PAYINFO").submit();
+	}
+
+
+
+
+	/*
+     * 수정불가.
+     */
+	var CST_PLATFORM		= 'test';
+	var LGD_window_type	= 'iframe';
+
+	/*
+     * 수정불가
+     */
+	function launchCrossPlatform(){
+		lgdwin = openXpay(document.getElementById('LGD_PAYINFO'), CST_PLATFORM, LGD_window_type, null, "", "");
+	}
+	/*
+     * FORM 명만  수정 가능
+     */
+	function getFormObject() {
+		return document.getElementById("LGD_PAYINFO");
+	}
+
+	/*
+     * 인증결과 처리
+     */
+	function payment_return() {
+		var fDoc;
+
+		fDoc = lgdwin.contentWindow || lgdwin.contentDocument;
+
+
+		if (fDoc.document.getElementById('LGD_RESPCODE').value == "0000") {
+
+			document.getElementById("LGD_PAYKEY").value = fDoc.document.getElementById('LGD_PAYKEY').value;
+			document.getElementById("LGD_PAYINFO").target = "_self";
+			document.getElementById("LGD_PAYINFO").action = "/shop/payres";
+			document.getElementById("LGD_PAYINFO").submit();
+		} else {
+			alert("LGD_RESPCODE (결과코드) : " + fDoc.document.getElementById('LGD_RESPCODE').value + "\n" + "LGD_RESPMSG (결과메시지): " + fDoc.document.getElementById('LGD_RESPMSG').value);
+			closeIframe();
+		}
+	}
 </script>

@@ -10,6 +10,18 @@ public class JsonUtils {
 
 	private static ObjectMapper mapper = new ObjectMapper();
 
+	public static String toJson(Object object) {
+		String json = "";
+
+		try {
+			json = mapper.writeValueAsString(object);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return json;
+	}
+
 	public static SearchInfo toSearchInfo(String json) {
 		try {
 			return mapper.readValue(json, SearchInfo.class);

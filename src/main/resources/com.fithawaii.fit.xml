@@ -10,6 +10,9 @@
 		<result property="state" column="state" />
 		<result property="stateKr" column="state_kr" />
 		<result property="country" column="country" />
+		<result property="hotelAddress" column="hotel_adr" />
+		<result property="hotelTel" column="hotel_tel" />
+		<result property="hotelUrl" column="hotel_url" />
 	</resultMap>
 
 	<resultMap id="HotelCategoryInfoResult" type="HotelCategoryInfo">
@@ -53,6 +56,9 @@
 		<result property="state" column="state" />
 		<result property="stateKr" column="state_kr" />
 		<result property="country" column="country" />
+		<result property="hotelAddress" column="hotel_adr" />
+		<result property="hotelTel" column="hotel_tel" />
+		<result property="hotelUrl" column="hotel_url" />
 		<result property="checkinTime" column="checkin_time" />
 		<result property="checkoutTime" column="checkout_time" />
 		<result property="floor" column="floor" />
@@ -120,7 +126,7 @@
 	</select>-->
 	<select id="selectHotelAllInfo" parameterType="map" resultMap="HotelAllInfoResult">
 		SELECT
-			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, MIN(r.price1) as price1, r.breakfast_yn, d.grade, d.resortfee_yn
+			i.hotel_no, i.hotel_nm, i.hotel_nm_kr, i.nat, i.state, i.state_kr, i.country, i.hotel_adr, i.hotel_tel, i.hotel_url, MIN(r.price1) as price1, r.breakfast_yn, d.room_cnt, d.grade, d.resortfee_yn
 		FROM
 			fit_hotel_info i, fit_room_type r, fit_hotel_detail d
 		WHERE
@@ -154,7 +160,7 @@
 
 	<select id="selectHotelDetailResult" parameterType="int" resultMap="HotelAllInfoResult">
 		SELECT
-			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, hotel_adr, hotel_tel, hotel_url,
 			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
 			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn,
 			checkin_time, checkout_time, FLOOR, room_cnt, grade, resortfee_yn, wifi_yn, baby_bed_yn, shuttle_yn, free_parking_yn, valet_parking_yn,
@@ -171,7 +177,7 @@
 
 	<select id="selectHotelDetailResultByTypeNo" parameterType="int" resultMap="HotelAllInfoResult">
 		SELECT
-			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, hotel_adr, hotel_tel, hotel_url,
 			c.cate_no, c.hotel_no, cate_nm, duration1, duration2, duration3, duration4, remark, cancel_policy,
 			type_no, r.hotel_no, r.cate_no, type_nm, agency_cd, price1, price2, price3, price4, breakfast_yn, breakfast_price, cot_price, cradle_yn, ac_yn, fridge_yn, bath_yn, garden_yn, vault_yn,
 			checkin_time, checkout_time, FLOOR, room_cnt, grade, resortfee_yn, wifi_yn, baby_bed_yn, shuttle_yn, free_parking_yn, valet_parking_yn,
@@ -188,7 +194,7 @@
 
 	<select id="selectHotelDetailInfo" resultMap="HotelDetailResult">
 		SELECT
-			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country,
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, hotel_adr, hotel_tel, hotel_url,
 			checkin_time, checkout_time, floor, room_cnt, grade, resortfee_yn, wifi_yn, baby_bed_yn, shuttle_yn, free_parking_yn, valet_parking_yn,
 			pet_yn, pool_yn, spa_yn, recreations, picnic_area_yn, conference_room_yn, kids_club_yn, nursery_yn, washer_yn, multi_lang_staff_yn, tourist_attraction
 		FROM
@@ -200,7 +206,7 @@
 
 	<select id="selectHotelInfoByName" resultMap="HotelInfoResult">
 		SELECT
-			hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country
+			hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, hotel_adr, hotel_tel, hotel_url
 		FROM
 			fit_hotel_info
 		WHERE

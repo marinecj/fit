@@ -67,7 +67,7 @@
 			</tr>
 			<tr>
 				<td>결제금액 </td>
-				<td><input type="text" name="LGD_AMOUNT" id="LGD_AMOUNT" value="<fmt:formatNumber value="${hotelAllInfo.roomInfo.price1}"  pattern="0"/>" readonly="true"/></td>
+				<td><input type="text" name="LGD_AMOUNT" id="LGD_AMOUNT" value="<fmt:formatNumber value="${hotelAllInfo.roomInfo.price1Won}"  pattern="0"/>" readonly="true"/></td>
 			</tr>
 			<tr>
 				<td>구매자 이메일 </td>

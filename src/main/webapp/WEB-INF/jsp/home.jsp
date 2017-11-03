@@ -109,8 +109,8 @@
 											<c:if test="${result.detailInfo.grade == '5성급'}"><span><em class="i3">5성급 호텔</em></span></c:if>
 										</div>
 										<div class="price">
-											<p class="p1"><em><fmt:formatNumber value="${result.roomInfo.price1 * 1.2}" pattern="#,###"/>원</em>(20%DC)</p>
-											<p class="p2"><strong><fmt:formatNumber value="${result.roomInfo.price1}" pattern="#,###"/></strong>원</p>
+											<p class="p1"><em><fmt:formatNumber value="${result.roomInfo.price1Won * 1.2}" pattern="#,###"/>원</em>(20%DC)</p>
+											<p class="p2"><strong><fmt:formatNumber value="${result.roomInfo.price1Won}" pattern="#,###"/></strong>원</p>
 										</div>
 										<div class="etc">
 											<span>리뷰 <em>56</em>건</span>
