@@ -2,6 +2,7 @@ package com.fithawaii.dao;
 
 import com.fithawaii.model.HotelCategoryInfo;
 import com.fithawaii.model.HotelDetailInfo;
+import com.fithawaii.model.SearchInfo;
 import java.util.List;
 
 import com.fithawaii.model.Fit;
@@ -16,7 +17,7 @@ public interface FitDAO {
 
 	public List<HotelAllInfo> selectHotelAllInfo();
 
-	public List<HotelAllInfo> selectHotelSearchResult(String key);
+	public List<HotelAllInfo> selectHotelSearchResult(SearchInfo searchInfo);
 
 	public List<HotelAllInfo> selectHotelDetailResult(int hotelNo);
 

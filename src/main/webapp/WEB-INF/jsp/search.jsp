@@ -7,7 +7,7 @@
 			<div class="search-sec">
 				<div class="row-group">
 					<div class="keyword-input">
-						<input type="text" id="keyword" maxlength="10" data-placeholder="어떤 스타일의 호텔을 원하세요?" placeholder="어떤 스타일의 호텔을 원하세요?" />
+						<input type="text" id="keyword" value="${searchInfo.keyword}" maxlength="10" data-placeholder="어떤 스타일의 호텔을 원하세요?" placeholder="어떤 스타일의 호텔을 원하세요?" />
 						<div class="ui-autocomplete-wrap">
 							<div class="other">
 								<span><a href="javascript:region('오하후');">오하후</a></span>
@@ -18,8 +18,8 @@
 						</div>
 					</div>
 					<div class="date-rang-picker">
-                        <input type="hidden" id="startDate" />
-                        <input type="hidden" id="endDate" />
+                        <input type="hidden" id="startDate" value="${searchInfo.startDate}" />
+                        <input type="hidden" id="endDate" value="${searchInfo.endDate}" />
 						<button><span><em data-txt="체크인"></em></span><span><em data-txt="체크아웃"></em></span></button>
 						<div class="date-rang-layer">
 							<div class="row"></div>
@@ -36,7 +36,7 @@
 						<div class="guest-picker-layer" style="display: none;">
 							<div class="row" data-idx="0" data-min="2" data-max="15">
 								<div class="label">
-									<span>어른</span><input type="text" id="adultCnt" readonly />
+									<span>어른</span><input type="text" id="adultCnt" value="${searchInfo.adultCnt}" readonly />
 								</div>
 								<div class="spinner-btn">
 									<button type="button" class="minus">빼기</button>
@@ -45,7 +45,7 @@
 							</div>
 							<div class="row" data-idx="1" data-min="0" data-max="5">
 								<div class="label">
-									<span>청소년(25개월~12살)</span><input type="text" id="youthCnt" readonly />
+									<span>청소년(25개월~12살)</span><input type="text" id="youthCnt" value="${searchInfo.youthCnt}" readonly />
 								</div>
 								<div class="spinner-btn">
 									<button type="button" class="minus">빼기</button>
@@ -54,7 +54,7 @@
 							</div>
 							<div class="row" data-idx="2" data-min="0" data-max="5">
 								<div class="label">
-									<span>유아(24개월미만)</span><input type="text" id="babyCnt" readonly />
+									<span>유아(24개월미만)</span><input type="text" id="babyCnt" value="${searchInfo.babyCnt}" readonly />
 								</div>
 								<div class="spinner-btn">
 									<button type="button" class="minus">빼기</button>
@@ -161,33 +161,21 @@
 		</div><!-- end : #contents -->
 	</div><!-- end : #container -->
 
-	<div id="map"<%-- class="map-wrap"--%>></div>
+	<%-- Spec Out GoogleMap
+	<div id="map" class="map-wrap"></div>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC13Gq6zInR7gY_OdFsmc3zySocZeU3sus&callback=initMap"></script>
-<style>
-	/* Always set the map height explicitly to define the size of the div
-     * element that contains the map. */
-	#map {
-		top: 55px;
-		height: 100%;
-	}
-	/* Optional: Makes the sample page fill the window.
-	html, body {
-		height: 100%;
-		margin: 0;
-		padding: 0;
-	} */
-</style>
-
+	--%>
 
 <%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
 
 <script>
+	ui.rangeSlider(231560, 3541650);
+	$("#slider-range" ).on("slidechange", function(event, ui) {console.log(2)});
+    <%-- Spec Out GoogleMap ui.mapSize();--%>
+
 	$(document).ready(function () {
+
 		$("#search_submit").click(function() {
-			/*if ($('#keyword').val() == '') {
-			 alert('검색할 키워드를 입력해주세요.');
-			 return false;
-			 }*/
 
 			var htParam = {
 				"keyword" : $('#keyword').val(),
@@ -214,7 +202,6 @@
 					_oRequest = null;
 				},
 				complete : function(oRes) {
-					console.log(oRes);
 					$("#container").empty();
 					$("#container").html(oRes.responseText);
 				}
@@ -222,31 +209,37 @@
 		});
 	});
 
-	ui.rangeSlider(231560, 3541650);
-	$("#slider-range" ).on("slidechange", function(event, ui) {console.log(2)});
-	ui.mapSize();
+    <%-- Spec Out GoogleMap
+    var gmap;
+    var geocoder;
+    function initMap() {
+        gmap = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 21.3281792, lng: -157.8691128},
+            zoom: 11
+        });
+        geocoder = new google.maps.Geocoder();
 
-	function initMap() {
-		var map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 8,
-			center: {lat: -34.397, lng: 150.644}
-		});
-		var geocoder = new google.maps.Geocoder();
+        //document.getElementById('submit').addEventListener('click', function() {
+        //geocodeAddress(geocoder, map);
+        //});
 
-		//document.getElementById('submit').addEventListener('click', function() {
-			geocodeAddress(geocoder, map);
-		//});
+        <c:forEach items="${resultList}" var="result" begin="0" end="9">
+            geocodeAddress("${result.hotelInfo.hotelAddress}");
+        </c:forEach>
+        //geocodeAddress("${resultList[0].hotelInfo.hotelAddress}");
 	}
 
-	function geocodeAddress(geocoder, resultsMap) {
+	//function geocodeAddress(geocoder, resultsMap) {
+	function geocodeAddress(address) {
 		//var address = document.getElementById('address').value;
-		<%-- var address = "${resultList.get(0).hotelInfo.hotelAddress}"; --%>
-		var address = "5000 Kahala Ave, Honolulu, HI 96816";
+		console.log(address);
+		//var address = "5000 Kahala Ave, Honolulu, HI 96816";
 		geocoder.geocode({'address': address}, function(results, status) {
 			if (status === 'OK') {
-				resultsMap.setCenter(results[0].geometry.location);
+				console.log('address : ' + address + ', result location : ' + results[0].geometry.location);
+				gmap.setCenter(results[0].geometry.location);
 				var marker = new google.maps.Marker({
-					map: resultsMap,
+					map: gmap,
 					position: results[0].geometry.location
 				});
 			} else {
@@ -254,4 +247,8 @@
 			}
 		});
 	}
+	--%>
 </script>
+<%-- Spec Out GoogleMap
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC13Gq6zInR7gY_OdFsmc3zySocZeU3sus&callback=initMap"></script>
+--%>

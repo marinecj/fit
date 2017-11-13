@@ -8,10 +8,10 @@ import com.fithawaii.model.Fit;
 import com.fithawaii.model.HotelAllInfo;
 import com.fithawaii.model.SearchInfo;
 import com.fithawaii.util.JsonUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,16 +25,21 @@ public class SearchController {
 	public String search(@RequestParam("json") String json, ModelMap model) {
 		System.out.println("### search param => " + json);
 
-		SearchInfo searchInfo = JsonUtils.toSearchInfo(json);
+		SearchInfo searchInfo = null;
+		try {
+			searchInfo = JsonUtils.toSearchInfo(json);
+		} catch (Exception e) {
+			System.out.println("ErrorMsg : " + e.getMessage() + ", StackTrace : " + e.getStackTrace());
+		}
 
 		//System.out.println("keyword : " + keyword + ", startDate : " + startDate + ", endDate : " + endDate + ",
 		// adultCnt : " + adultCnt + ", youthCnt : " + youthCnt + ", babyCnt : " + babyCnt + ", totalCnt : " + totalCnt);
 
-		String keyword = searchInfo.getKeyword();
+		//String keyword = searchInfo.getKeyword();
 
 		List<HotelAllInfo> resultList = null;
 
-		if (StringUtils.isEmpty(keyword)) {
+		if (searchInfo == null || (StringUtils.isBlank(searchInfo.getKeyword()) && StringUtils.isBlank(searchInfo.getStartDate()))) {
 			// Select All
 			resultList = new FitBO().getHotelAllInfo();
 			/*for (int i = 0; i < resultList.size(); i++) {
@@ -42,15 +47,17 @@ public class SearchController {
 				System.out.println("Hotel resultList : " + room.getHotelInfo().getHotelNo() + ", " + room.getCateInfo().getCateNo() + ", " + room.getRoomInfo().getTypeNo());
 			}*/
 		} else {
-			resultList = new FitBO().getHotelSearchResult(keyword);
+			resultList = new FitBO().getHotelSearchResult(searchInfo);
 		}
 
-		System.out.println("### search => resultList size : " + resultList.size());
+		if (resultList != null) {
+			System.out.println("### search => resultList size : " + resultList.size());
 
-		model.addAttribute("resultList", resultList);
-		model.addAttribute("resultListSize", resultList.size());
+			model.addAttribute("resultList", resultList);
+			model.addAttribute("resultListSize", resultList.size());
 
-		//model.addAttribute("keyword", searchInfo.getKeyword());
+			model.addAttribute("searchInfo", searchInfo);
+		}
 
 		return "search";
 	}

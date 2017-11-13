@@ -1,16 +1,21 @@
 package com.fithawaii.model;
 
-import java.util.Date;
-
 public class SearchInfo {
 
 	private String keyword;
-	private Date startDate;
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	private int adultCnt;
 	private int youthCnt;
 	private int babyCnt;
 	private int totalCnt;
+
+	public SearchInfo() {
+	}
+
+	public SearchInfo(String keyword) {
+		this.keyword = keyword;
+	}
 
 	public String getKeyword() {
 		return keyword;
@@ -20,19 +25,19 @@ public class SearchInfo {
 		this.keyword = keyword;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 

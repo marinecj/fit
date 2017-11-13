@@ -8,6 +8,7 @@ import com.fithawaii.model.HotelCategoryInfo;
 import com.fithawaii.model.HotelDetailInfo;
 import com.fithawaii.model.HotelInfo;
 import com.fithawaii.model.HotelRoomInfo;
+import com.fithawaii.model.SearchInfo;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
@@ -65,7 +66,7 @@ public class FitBO {
 		return hotelAllInfoList;
 	}
 
-	public List<HotelAllInfo> getHotelSearchResult(String key) {
+	public List<HotelAllInfo> getHotelSearchResult(SearchInfo searchInfo) {
 		// connect Mybatis session
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
@@ -74,7 +75,7 @@ public class FitBO {
 		try {
 			// connect Mapper
 			FitDAO fitDAO = sqlSession.getMapper(FitDAO.class);
-			hotelAllInfoList = fitDAO.selectHotelSearchResult(key);
+			hotelAllInfoList = fitDAO.selectHotelSearchResult(searchInfo);
 		} catch (Exception e) {
 			sqlSession.rollback();
 			e.printStackTrace();

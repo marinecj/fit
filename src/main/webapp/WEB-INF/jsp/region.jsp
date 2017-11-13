@@ -191,10 +191,20 @@
 
 	</div><!-- end : #contents -->
 
+	<%-- Spec Out GoogleMap
+	<div id="map" class="map-wrap"></div>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC13Gq6zInR7gY_OdFsmc3zySocZeU3sus&callback=initMap"></script>
+    --%>
+
 <%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
 
 <script>
+	$(".fv-slides ul").bxSlider({speed: 600, auto: true, autoControls:false});
+
+	ui.mapSize();
+
 	$(document).ready(function () {
+
 		$("#search_submit").click(function() {
 			/*if ($('#keyword').val() == '') {
 			 alert('검색할 키워드를 입력해주세요.');
@@ -234,5 +244,43 @@
 		});
 	});
 
-	$(".fv-slides ul").bxSlider({speed: 600, auto: true, autoControls:false});
+    <%-- Spec Out GoogleMap
+    var gmap;
+    var geocoder;
+    function initMap() {
+        gmap = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 21.3281792, lng: -157.8691128},
+            zoom: 11
+        });
+        geocoder = new google.maps.Geocoder();
+
+        //document.getElementById('submit').addEventListener('click', function() {
+        //geocodeAddress(geocoder, map);
+        //});
+
+        <c:forEach items="${resultList}" var="result" begin="0" end="9">
+            geocodeAddress("${result.hotelInfo.hotelAddress}");
+        </c:forEach>
+        //geocodeAddress("${resultList[0].hotelInfo.hotelAddress}");
+	}
+
+	//function geocodeAddress(geocoder, resultsMap) {
+	function geocodeAddress(address) {
+		//var address = document.getElementById('address').value;
+		console.log(address);
+		//var address = "5000 Kahala Ave, Honolulu, HI 96816";
+		geocoder.geocode({'address': address}, function(results, status) {
+			if (status === 'OK') {
+				console.log('address : ' + address + ', result location : ' + results[0].geometry.location);
+				gmap.setCenter(results[0].geometry.location);
+				var marker = new google.maps.Marker({
+					map: gmap,
+					position: results[0].geometry.location
+				});
+			} else {
+				alert('Geocode was not successful for the following reason: ' + status);
+			}
+		});
+	}
+	--%>
 </script>

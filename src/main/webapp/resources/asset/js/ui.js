@@ -149,6 +149,7 @@ ui.fitSearch = (function() {
     var objData = $(".date-rang-picker");
     var objDataLayer = $(".date-rang-layer");
     var objDataBtn = objData.find("button");
+console.log("objData - " + objData);
     resetTxt();
     objDataLayer.find(".close").click(function(){
       objData.find("button").removeClass("act");
@@ -435,7 +436,7 @@ ui.lastList = function(){
 }
 
 ui.mapSize = function(){
-  var mObj = $(".map-wrap"), sObj = $("#container");
+  var mObj = $(".map-wrap"), sObj = $("#contents");
   var wS;
   if($("#includeHeader").length==1){
     setTimeout(posCal, 300);

@@ -1,7 +1,7 @@
 /* bourbon framework */
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css");
-@import url("http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css");
+/* @import url("http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css"); */
 .width-5 {
   width: 5% !important; }
 
@@ -3039,10 +3039,10 @@ h1 {
 
 .map-wrap {
   position: absolute;
-  top: 55px;
+  /*top: 55px;*/
   right: 0;
-  background: #a3ccff;
-  display: none; }
+  /*background: #a3ccff;*/
+  /*display: none;*/ }
 
 .col-group-wrap #contents {
   width: 1150px;

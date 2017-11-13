@@ -4,8 +4,8 @@
 <spring:url value="https://s3.ap-northeast-2.amazonaws.com/fit-hawaii-s3/asset/css/dep.css?ver=20170207" var="depCss" />
 <spring:url value="https://s3.ap-northeast-2.amazonaws.com/fit-hawaii-s3/asset/images" var="Img" />
 --%>
-<spring:url value="/resources/asset/css/common.css?ver=20170207" var="commonCss" />
-<spring:url value="/resources/asset/css/dep.css?ver=20170207" var="depCss" />
+<spring:url value="/resources/asset/css/common.css?ver=20171106" var="commonCss" />
+<spring:url value="/resources/asset/css/dep.css?ver=20171106" var="depCss" />
 <spring:url value="/resources/asset/images" var="Img" />
 
 <%--

@@ -141,20 +141,51 @@
 		GROUP BY i.hotel_no
 	</select>
 
-	<select id="selectHotelSearchResult" parameterType="String" resultMap="HotelAllInfoResult">
+	<select id="selectHotelSearchResult" parameterType="com.fithawaii.model.SearchInfo" resultMap="HotelAllInfoResult">
 		SELECT
-			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, MIN(r.price1) as price1, r.breakfast_yn, d.grade, d.resortfee_yn
+			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, hotel_adr, hotel_tel, hotel_url, MIN(r.price1) as price1, r.breakfast_yn, d.grade, d.resortfee_yn
 		FROM
-			fit_hotel_info i, fit_room_type r, fit_hotel_detail d
+			fit_hotel_info i, fit_hotel_cate c, fit_room_type r, fit_hotel_detail d
 		WHERE
-			i.hotel_no = r.hotel_no
+			i.hotel_no = c.hotel_no
+			AND c.hotel_no = r.hotel_no
+			AND c.cate_no = r.cate_no
 			AND i.hotel_no = d.hotel_no
+		<if test="keyword != null and keyword != ''">
 			AND (
-				hotel_nm LIKE CONCAT('%', #{key}, '%')
-				OR hotel_nm_kr LIKE CONCAT('%', #{key}, '%')
-				OR state LIKE CONCAT('%', #{key}, '%')
-				OR state_kr LIKE CONCAT('%', #{key}, '%')
+				hotel_nm LIKE CONCAT('%', #{keyword}, '%')
+				OR hotel_nm_kr LIKE CONCAT('%', #{keyword}, '%')
+				OR state LIKE CONCAT('%', #{keyword}, '%')
+				OR state_kr LIKE CONCAT('%', #{keyword}, '%')
 			)
+		</if>
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+			AND (
+				(LENGTH(c.duration1) = 17 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration1, 1, 8), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration1, 10), '%m/%d/%Y'))
+				OR (LENGTH(c.duration1) = 35 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration1, 18, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration1, 28), '%m/%d/%Y'))
+				OR (LENGTH(c.duration1) = 53 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration1, 36, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration1, 46), '%m/%d/%Y'))
+				OR (LENGTH(c.duration1) = 71 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration1, 54, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration1, 64), '%m/%d/%Y'))
+				OR (LENGTH(c.duration1) = 89 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration1, 72, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration1, 82), '%m/%d/%Y'))
+
+				OR (LENGTH(c.duration2) = 17 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration2, 1, 8), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration2, 10), '%m/%d/%Y'))
+				OR (LENGTH(c.duration2) = 35 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration2, 18, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration2, 28), '%m/%d/%Y'))
+				OR (LENGTH(c.duration2) = 53 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration2, 36, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration2, 46), '%m/%d/%Y'))
+				OR (LENGTH(c.duration2) = 71 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration2, 54, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration2, 64), '%m/%d/%Y'))
+				OR (LENGTH(c.duration2) = 89 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration2, 72, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration2, 82), '%m/%d/%Y'))
+
+				OR (LENGTH(c.duration3) = 17 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration3, 1, 8), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration3, 10), '%m/%d/%Y'))
+				OR (LENGTH(c.duration3) = 35 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration3, 18, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration3, 28), '%m/%d/%Y'))
+				OR (LENGTH(c.duration3) = 53 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration3, 36, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration3, 46), '%m/%d/%Y'))
+				OR (LENGTH(c.duration3) = 71 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration3, 54, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration3, 64), '%m/%d/%Y'))
+				OR (LENGTH(c.duration3) = 89 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration3, 72, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration3, 82), '%m/%d/%Y'))
+
+				OR (LENGTH(c.duration4) = 17 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration4, 1, 8), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration4, 10), '%m/%d/%Y'))
+				OR (LENGTH(c.duration4) = 35 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration4, 18, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration4, 28), '%m/%d/%Y'))
+				OR (LENGTH(c.duration4) = 53 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration4, 36, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration4, 46), '%m/%d/%Y'))
+				OR (LENGTH(c.duration4) = 71 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration4, 54, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration4, 64), '%m/%d/%Y'))
+				OR (LENGTH(c.duration4) = 89 AND #{startDate} >= STR_TO_DATE(SUBSTR(c.duration4, 72, 9), '%m/%d/%Y') AND #{endDate} <![CDATA[<=]]> STR_TO_DATE(SUBSTR(c.duration4, 82), '%m/%d/%Y'))
+			)
+		</if>
 		GROUP BY i.hotel_no
 	</select>
 

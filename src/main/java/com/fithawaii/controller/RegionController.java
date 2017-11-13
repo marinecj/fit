@@ -3,6 +3,7 @@ package com.fithawaii.controller;
 import com.fithawaii.bo.FitBO;
 import com.fithawaii.model.Fit;
 import com.fithawaii.model.HotelAllInfo;
+import com.fithawaii.model.SearchInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +19,10 @@ public class RegionController {
 	public String region(@PathVariable("name") String name, ModelMap model) {
 		System.out.println("### region => name : " + name);
 
+		SearchInfo searchInfo = new SearchInfo(name);
+
 		// Search Hotel
-		List<HotelAllInfo> resultList = new FitBO().getHotelSearchResult(name);
+		List<HotelAllInfo> resultList = new FitBO().getHotelSearchResult(searchInfo);
 		/*for (int i = 0; i < resultList.size(); i++) {
 			HotelAllInfo room = resultList.get(i);
 			System.out.println(name + " region resultList : " + room.getHotelInfo().getHotelNo() + ", " + room.getCateInfo().getCateNo() + ", " + room.getRoomInfo().getTypeNo());
