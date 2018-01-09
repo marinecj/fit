@@ -223,29 +223,15 @@
 			<div class="hotel-photo-article">
 				<div class="hp-photo">
 					<ul>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
-						<li><img src="${Img}/temp/hp_photo.jpg" alt="873*552" /></li>
+<c:forEach begin="1" end="10" varStatus="status">
+						<li><img src="${Img}/data/${detail.hotelNo}/${status.count}.jpg"<%-- alt="873*552"--%> /></li>
+</c:forEach>
 					</ul>
 				</div>
 				<div class="hp-pager">
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
-					<a href="#"><img src="${Img}/temp/hp_thum.jpg" alt="100*100" /></a>
+<c:forEach begin="1" end="10" varStatus="status">
+					<a href="#"><img src="${Img}/data/${detail.hotelNo}/${status.count}_thum.jpg"<%-- alt="100*100"--%> /></a>
+</c:forEach>
 				</div>
 			</div>
 
@@ -360,7 +346,7 @@
 				<div class="review-write">
 					<div class="star-rating-box">
 						<div class="item">
-							<div class="star-rating" data-base-score="5">
+							<div class="star-rating" data-base-score="<c:out value="${review.star1 == null ? '5' : review.star1}"/>">
 								<span class="tit">접근성</span>
 								<div class="star">
 									<em></em>
@@ -370,11 +356,11 @@
 									<a href="#" data-num="4">4점</a>
 									<a href="#" data-num="5">5점</a>
 								</div>
-								<strong class="num"><input type="text" disabled="disabled" />점</strong>
+								<strong class="num"><input id="star1" type="text" disabled="disabled" />점</strong>
 							</div>
 						</div>
 						<div class="item">
-							<div class="star-rating" data-base-score="5">
+							<div class="star-rating" data-base-score="<c:out value="${review.star2 == null ? '5' : review.star2}"/>">
 								<span class="tit">부대시설</span>
 								<div class="star">
 									<em></em>
@@ -384,11 +370,11 @@
 									<a href="#" data-num="4">4점</a>
 									<a href="#" data-num="5">5점</a>
 								</div>
-								<strong class="num"><input type="text" disabled="disabled" />점</strong>
+								<strong class="num"><input id="star2" type="text" disabled="disabled" />점</strong>
 							</div>
 						</div>
 						<div class="item">
-							<div class="star-rating" data-base-score="5">
+							<div class="star-rating" data-base-score="<c:out value="${review.star3 == null ? '5' : review.star3}"/>">
 								<span class="tit">객실시설</span>
 								<div class="star">
 									<em></em>
@@ -398,11 +384,11 @@
 									<a href="#" data-num="4">4점</a>
 									<a href="#" data-num="5">5점</a>
 								</div>
-								<strong class="num"><input type="text" disabled="disabled" />점</strong>
+								<strong class="num"><input id="star3" type="text" disabled="disabled" />점</strong>
 							</div>
 						</div>
 						<div class="item">
-							<div class="star-rating" data-base-score="5">
+							<div class="star-rating" data-base-score="<c:out value="${review.star4 == null ? '5' : review.star4}"/>">
 								<span class="tit">서비스</span>
 								<div class="star">
 									<em></em>
@@ -412,17 +398,17 @@
 									<a href="#" data-num="4">4점</a>
 									<a href="#" data-num="5">5점</a>
 								</div>
-								<strong class="num"><input type="text" disabled="disabled" />점</strong>
+								<strong class="num"><input id="star4" type="text" disabled="disabled" />점</strong>
 							</div>
 						</div>
 						<div class="item total-num"><strong>평점 <input type="text" disabled="disabled" id="review-star-total" > 점</strong></div>
 					</div>
 					<div class="txt-box">
-						<textarea rows="5" placeholder="리뷰를 입력하세요."></textarea>
+						<textarea id="comment" rows="5" placeholder="${review.comment == null ? '리뷰를 입력하세요.' : review.comment}"><c:out value="${review.comment == null ? '' : review.comment}"/></textarea>
 						<p class="etc"><a href="#">이미지 첨부하기</a></p>
 					</div>
 					<div class="btn-box">
-						<a href="#" class="i-btn bt-review">리뷰작성</a>
+						<a href="javascript:review();" class="i-btn bt-review">리뷰작성</a>
 					</div>
 				</div>
 				<div class="d-review-list">
@@ -674,4 +660,34 @@
 		}
 	});
 	ui.starRating();
+
+    function review() {
+        var htParam = {
+            "hotelNo" : "${detail.hotelNo}",
+            "star1" : $('#star1').val(),
+            "star2" : $('#star2').val(),
+            "star3" : $('#star3').val(),
+            "star4" : $('#star4').val(),
+            "comment" : $('#comment').val()
+        };
+
+        var _oRequest = $.ajax({
+            type : "POST",
+            url : "/review",
+            cache : false,
+            data : {
+                "json":JSON.stringify(htParam)
+            },
+            error : function(request,status,error) {
+                if (error != "") {
+                    console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                }
+                _oRequest = null;
+            },
+            complete : function(oRes) {
+                console.log("status:" + oRes.status + ", responseText:" + oRes.responseText);
+                alert("리뷰가 등록되었습니다.");
+            }
+        });
+    }
 </script>

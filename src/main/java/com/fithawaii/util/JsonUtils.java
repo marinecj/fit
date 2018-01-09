@@ -1,5 +1,6 @@
 package com.fithawaii.util;
 
+import com.fithawaii.model.ReviewInfo;
 import com.fithawaii.model.ShopInfo;
 import java.io.IOException;
 
@@ -25,6 +26,17 @@ public class JsonUtils {
 	public static SearchInfo toSearchInfo(String json) {
 		try {
 			return mapper.readValue(json, SearchInfo.class);
+		} catch (IOException e) {
+			//logger.error(e.getMessage(), e);
+			System.out.println(e);
+		}
+
+		return null;
+	}
+
+	public static ReviewInfo toReviewInfo(String json) {
+		try {
+			return mapper.readValue(json, ReviewInfo.class);
 		} catch (IOException e) {
 			//logger.error(e.getMessage(), e);
 			System.out.println(e);

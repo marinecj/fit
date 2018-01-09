@@ -282,10 +282,6 @@
 <script>
 	$(document).ready(function () {
 		$("#search_submit").click(function() {
-			/*if ($('#keyword').val() == '') {
-			 alert('검색할 키워드를 입력해주세요.');
-			 return false;
-			 }*/
 
 			var htParam = {
 				"keyword" : $('#keyword').val(),
@@ -294,7 +290,7 @@
 				"adultCnt" : $('#adultCnt').val(),
 				"youthCnt" : $('#youthCnt').val(),
 				"babyCnt" : $('#babyCnt').val(),
-				"totalCnt" : $('#totalCnt').val()
+				"totalCnt" : $('#totalCnt').html()
 			};
 
 			_oRequest = $.ajax({
@@ -312,7 +308,6 @@
 					_oRequest = null;
 				},
 				complete : function(oRes) {
-					console.log(oRes);
 					$("#container").empty();
 					$("#container").html(oRes.responseText);
 				}

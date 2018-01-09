@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/taglibs.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/urls.jsp" %>
-
 
 <!DOCTYPE html>
 <html>
@@ -13,11 +13,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="google-signin-scope" content="profile email">
 	<meta name="google-signin-client_id" content="389273714993-v39nbotiok1lt1s6uv4p1pbcp4m6qpd6.apps.googleusercontent.com">
-<title>Fit Hawaii</title>
- 
-<link href="${commonCss}" rel="stylesheet" />
-<%--<link href="${depCss}" rel="stylesheet" />--%>
-<link rel="shortcut icon" type="image/x-icon" href="${Img}/common/favicon.png"/>
+	<title><tiles:getAsString name="title" />Fit Hawaii</title>
+
+	<link href="${commonCss}" rel="stylesheet" />
+	<%--<link href="${depCss}" rel="stylesheet" />--%>
+	<link rel="shortcut icon" type="image/x-icon" href="${Img}/common/favicon.png"/>
 	<style>
 		#loading {
 			width: 100%;
@@ -41,83 +41,28 @@
 
 <body>
 
-<dl class="skip">
-	<dt>바로가기 메뉴</dt>
-	<dd><a href="#header">메인 메뉴 바로가기</a></dd>
-	<dd><a href="#container">본문 바로가기</a></dd>
-</dl>
 
 <div class="wrap">
 	<!-- start : Header -->
 	<div id="includeHeader">
-		<div id="header" class="wide">
-			<div class="in-wrap">
-				<h1><a href="/"><img src="${Img}/layout/logo.png" alt="FITHAWALL" /></a></h1>
-				<div class="gnb">
-					<ul>
-						<li><a href="javascript:region('오하후');">오하후</a></li>
-						<li><a href="javascript:region('마우이');">마우이</a></li>
-						<li><a href="javascript:region('빅아일랜드');">빅아일랜드</a></li>
-						<li><a href="javascript:region('카우아이');">카우아이</a></li>
-					</ul>
-				</div>
-				<div class="util">
-					<ul>
-						<li><a href="#">도움말</a></li>
-						<li><a href="#" id="link-join" style="display: none;">회원가입</a></li>
-						<li><a href="#" id="link-login" style="display: none;" onclick="popup.layerPop($(this)); return false;">로그인</a></li>
-						<li><a href="#" id="login-info" style="display: none;"></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<tiles:insertAttribute name="header" />
 	</div>
 	<!-- end : Header -->
 
 	<!-- container  -->
-	<div id="loading"><img id="loading-image" src="/resources/asset/images/common/loading2.gif" alt="Loading..." /></div>
 	<div id="container" class="main-wrap">
+		<tiles:insertAttribute name="content" />
 	</div>
 	<!-- //container -->
 
 	<!-- start : includeFooter -->
-	<div id="includeFooter" style="display: none;">
-		<div id="footer">
-			<div class="in-wrap">
-				<div class="fo-etc-links">
-					<a href="#" class="e1">정책 및 약관</a>
-					<a href="#" class="e2">이용약관</a>
-					<a href="#" class="e3">개인정보취급방침</a>
-					<a href="#" class="e4">핏하와이정책</a>
-					<a href="#" class="e5">고객센터</a>
-					<a href="#" class="e6">Contect Us</a>
-				</div>
-				<div class="fo-sns">
-					<a href="#"><img src="${Img}/layout/fo_sns1.png" alt="페이스북" /></a>
-					<a href="#"><img src="${Img}/layout/fo_sns2.png" alt="인스타" /></a>
-					<a href="#"><img src="${Img}/layout/fo_sns3.png" alt="네이버" /></a>
-				</div>
-				<div class="fo-etc-info">
-					<p>
-						비비드미디어 <span class="bar">|</span>
-						대표 정희철 외 <span class="bar">|</span>
-						개인정보책임자 홍길동
-					</p>
-					<p>
-						사업자등록번호 : 220-05-69118 <span class="bar">|</span>
-						통신판매업신고번호 : 제 2014-서울 서초-1067 호 <span class="bar">|</span>
-						사업자정보확인
-					</p>
-					<p>
-						서울시 서초구 서초대로73길 42 리가스퀘어 607호 <span class="bar">|</span>
-						TEL 02-501-0435   FAX 02-501-0465
-					</p>
-				</div>
-			</div>
-		</div>
+	<div id="includeFooter">
+		<tiles:insertAttribute name="footer" />
 	</div>
 	<!-- end : includeFooter -->
 </div><!-- end : wrap -->
+
+<div id="loading"><img id="loading-image" src="/resources/asset/images/common/loading2.gif" alt="Loading..." /></div>
 
 <div class="layer-area-wrap">
 
@@ -341,37 +286,6 @@
 	</div><!-- end : #share-step1 -->
 
 </div><!-- end : layer-area-wrap -->
-
-<%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
-
-<script>
-	/*document.domain = "ec2-13-124-92-64.ap-northeast-2.compute.amazonaws.com";*/
-
-	$(document).ready(function () {
-		_oRequest = $.ajax({
-			url : "${pageKey}",
-			cache : false,
-			async: true,
-			data : "",
-			type : "GET",
-			error : function() {
-				_oRequest = null;
-			},
-			complete : function(oRes) {
-				$('#loading').show();
-				$("#container").empty();
-				$("#container").html(oRes.responseText);
-				$('#loading').hide();
-			}
-		});
-	});
-
-	$(window).load(function() {
-		$('#loading').hide();
-		//$('#container').show();
-		$('#includeFooter').show();
-	});
-</script>
 
 </body>
 </html>

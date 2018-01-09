@@ -37,11 +37,11 @@ public class ShopController {
      * 기본정보를 변경하여 주시기 바랍니다.(파라미터 전달시 POST를 사용하세요)
      */
 
-	private String SERVER_URL			= "http://ec2-13-124-92-64.ap-northeast-2.compute.amazonaws.com:8080";
-	//private String SERVER_URL			= "http://localhost:8080";
+	//private String SERVER_URL			= "http://ec2-13-124-92-64.ap-northeast-2.compute.amazonaws.com:8080";
+	private String SERVER_URL			= "http://localhost:8080";
 
-	private String CONFIG_PATH		= SERVER_URL + "/resources/lgdacom";  //LG유플러스에서 제공한 환경파일("/conf/lgdacom.conf,/conf/mall.conf") 위치 지정.
-	//private String CONFIG_PATH		= "J:\\dev\\IntellijProjects\\fit\\src\\main\\webapp\\resources\\lgdacom";  //local
+	//private String CONFIG_PATH		= SERVER_URL + "/resources/lgdacom";  //LG유플러스에서 제공한 환경파일("/conf/lgdacom.conf,/conf/mall.conf") 위치 지정.
+	private String CONFIG_PATH		= "J:\\dev\\IntellijProjects\\fit\\src\\main\\webapp\\resources\\lgdacom";  //local
 
 	//private String CST_PLATFORM         = "service";
 	private String CST_PLATFORM         = "test";                 //LG유플러스 결제서비스 선택(test:테스트, service:서비스)

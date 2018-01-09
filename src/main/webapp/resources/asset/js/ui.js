@@ -149,7 +149,6 @@ ui.fitSearch = (function() {
     var objData = $(".date-rang-picker");
     var objDataLayer = $(".date-rang-layer");
     var objDataBtn = objData.find("button");
-console.log("objData - " + objData);
     resetTxt();
     objDataLayer.find(".close").click(function(){
       objData.find("button").removeClass("act");
@@ -187,8 +186,8 @@ console.log("objData - " + objData);
       }else{
         if(!$(this).hasClass("act")){
           $(this).addClass("act");
-          objDataLayer.show();
         }
+        objDataLayer.show();
       }
       hideFocus();
     });
@@ -213,11 +212,12 @@ console.log("objData - " + objData);
     var trigger = wrap.find(".guest-trigger");
     var itemPop = wrap.find(".guest-picker-layer");
     var item = wrap.find('.row');
+    var itemVal = itemPop.find("input");
     var min = [], max = [], num = [];
     item.each(function(i){
       min[i]=parseInt($(this).attr("data-min"));
       max[i]=parseInt($(this).attr("data-max"));
-      num[i]=parseInt($(this).attr("data-min"));
+      num[i]=parseInt(itemVal[i].value!="" ? itemVal[i].value : $(this).attr("data-min"));
       guestWriteTxt(i)
     });
     guestNumChange();

@@ -24,6 +24,7 @@
 				</dl>
 				<div class="btn-box">
 					<a href="<%--javascript:doPay();--%>#" id="buy_submit" class="i-btn bt-payment">결재하기</a>
+					<p id="msg" style="color:red;"></p>
 					<p>총 결제 금액에는 객실+세금+봉사료+기타 할인이 포함되어 있습니다.</p>
 				</div>
 			</div><!-- end : .left-menu -->
@@ -421,19 +422,16 @@
      * 인증결과 처리
      */
 	function payment_return() {
-		var fDoc;
-
-		fDoc = lgdwin.contentWindow || lgdwin.contentDocument;
-
+		var fDoc = lgdwin.contentWindow || lgdwin.contentDocument;
 
 		if (fDoc.document.getElementById('LGD_RESPCODE').value == "0000") {
-
 			document.getElementById("LGD_PAYKEY").value = fDoc.document.getElementById('LGD_PAYKEY').value;
 			document.getElementById("LGD_PAYINFO").target = "_self";
 			document.getElementById("LGD_PAYINFO").action = "/shop/payres";
 			document.getElementById("LGD_PAYINFO").submit();
 		} else {
-			alert("LGD_RESPCODE (결과코드) : " + fDoc.document.getElementById('LGD_RESPCODE').value + "\n" + "LGD_RESPMSG (결과메시지): " + fDoc.document.getElementById('LGD_RESPMSG').value);
+			<%--alert("LGD_RESPCODE (결과코드) : " + fDoc.document.getElementById('LGD_RESPCODE').value + "\n" + "LGD_RESPMSG (결과메시지): " + fDoc.document.getElementById('LGD_RESPMSG').value);--%>
+			$("#msg").html(fDoc.document.getElementById('LGD_RESPMSG').value + " (" + fDoc.document.getElementById('LGD_RESPCODE').value + ")");
 			closeIframe();
 		}
 	}

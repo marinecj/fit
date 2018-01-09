@@ -57,6 +57,11 @@ public class SearchController {
 			model.addAttribute("resultListSize", resultList.size());
 
 			model.addAttribute("searchInfo", searchInfo);
+
+			/* min max 가격 취득
+			for (HotelAllInfo hotelAllInfo : resultList) {
+				hotelAllInfo.getRoomInfo().
+			}*/
 		}
 
 		return "search";

@@ -20,7 +20,7 @@
 					<div class="date-rang-picker">
                         <input type="hidden" id="startDate" value="${searchInfo.startDate}" />
                         <input type="hidden" id="endDate" value="${searchInfo.endDate}" />
-						<button><span><em data-txt="체크인"></em></span><span><em data-txt="체크아웃"></em></span></button>
+						<button${searchInfo.startDate != '' ? ' class="sel"' : ''}><span><em data-txt="${searchInfo.startDate != '' ? searchInfo.startDate : '체크인'}"></em></span><span><em data-txt="${searchInfo.endDate != '' ? searchInfo.endDate : '체크아웃'}"></em></span></button>
 						<div class="date-rang-layer">
 							<div class="row"></div>
 							<div class="gp-close-box">
@@ -30,8 +30,13 @@
 					</div>
 					<div class="guest-picker">
 						<button type="button" class="guest-trigger">
-							<span class="tt">숙박 인원</span>
-							<span class="num">총 <em id="totalCnt"></em>명</span>
+							<span class="tt">
+								<c:choose>
+									<c:when test="${searchInfo.totalCnt != ''}">총 ${searchInfo.totalCnt}명</c:when>
+									<c:otherwise>숙박 인원</c:otherwise>
+								</c:choose>
+							</span>
+							<span class="num">총 <em id="totalCnt">${searchInfo.totalCnt}</em>명</span>
 						</button>
 						<div class="guest-picker-layer" style="display: none;">
 							<div class="row" data-idx="0" data-min="2" data-max="15">
@@ -184,7 +189,7 @@
 				"adultCnt" : $('#adultCnt').val(),
 				"youthCnt" : $('#youthCnt').val(),
 				"babyCnt" : $('#babyCnt').val(),
-				"totalCnt" : $('#totalCnt').val()
+				"totalCnt" : $('#totalCnt').html()
 			};
 
 			_oRequest = $.ajax({

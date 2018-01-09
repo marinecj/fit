@@ -3,6 +3,7 @@ package com.fithawaii.controller;
 import com.fithawaii.bo.FitBO;
 import com.fithawaii.model.HotelAllInfo;
 import com.fithawaii.model.HotelDetailInfo;
+import com.fithawaii.model.ReviewInfo;
 import com.fithawaii.model.SearchInfo;
 import com.fithawaii.util.JsonUtils;
 import org.springframework.stereotype.Controller;
@@ -32,9 +33,16 @@ public class DetailController {
 							+ ", grade : " + hotelDetailInfo.getGrade());
 		}
 
+		ReviewInfo reviewInfo = new FitBO().getHotelReview(hotelNo);
+		if (reviewInfo != null) {
+			System.out.println("hotelNo : " + reviewInfo.getHotelNo() + ", Comment : " + reviewInfo.getComment());
+		}
+
 		model.addAttribute("hotelAllInfoList", hotelAllInfoList);
 
 		model.addAttribute("detail", hotelDetailInfo);
+
+		model.addAttribute("review", reviewInfo);
 
 		return "detail";
 	}

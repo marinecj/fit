@@ -89,6 +89,15 @@
 		<association property="roomInfo" javaType="HotelRoomInfo" resultMap="HotelRoomInfoResult"/>
 	</resultMap>
 
+	<resultMap id="ReviewInfoResult" type="ReviewInfo">
+		<result property="hotelNo" column="hotel_no" />
+		<result property="star1" column="star1" />
+		<result property="star2" column="star2" />
+		<result property="star3" column="star3" />
+		<result property="star4" column="star4" />
+		<result property="comment" column="cmt" />
+	</resultMap>
+
 	<select id="selectHotelRecommendInfo" resultMap="HotelAllInfoResult">
 		SELECT
 			i.hotel_no, i.hotel_nm, i.hotel_nm_kr, i.nat, i.state, i.state_kr, i.country, MIN(r.price1) as price1, r.breakfast_yn, d.grade, d.resortfee_yn
@@ -126,7 +135,9 @@
 	</select>-->
 	<select id="selectHotelAllInfo" parameterType="map" resultMap="HotelAllInfoResult">
 		SELECT
-			i.hotel_no, i.hotel_nm, i.hotel_nm_kr, i.nat, i.state, i.state_kr, i.country, i.hotel_adr, i.hotel_tel, i.hotel_url, MIN(r.price1) as price1, r.breakfast_yn, d.room_cnt, d.grade, d.resortfee_yn
+			i.hotel_no, i.hotel_nm, i.hotel_nm_kr, i.nat, i.state, i.state_kr, i.country, i.hotel_adr, i.hotel_tel, i.hotel_url,
+			MIN(r.price1) as price1, MIN(r.price2) as price2, MIN(r.price3) as price3, MIN(r.price4) as price4,
+			r.breakfast_yn, d.room_cnt, d.grade, d.resortfee_yn
 		FROM
 			fit_hotel_info i, fit_room_type r, fit_hotel_detail d
 		WHERE
@@ -141,9 +152,11 @@
 		GROUP BY i.hotel_no
 	</select>
 
-	<select id="selectHotelSearchResult" parameterType="com.fithawaii.model.SearchInfo" resultMap="HotelAllInfoResult">
+	<select id="selectHotelSearchResult" parameterType="SearchInfo" resultMap="HotelAllInfoResult">
 		SELECT
-			i.hotel_no, hotel_nm, hotel_nm_kr, nat, state, state_kr, country, hotel_adr, hotel_tel, hotel_url, MIN(r.price1) as price1, r.breakfast_yn, d.grade, d.resortfee_yn
+			i.hotel_no, i.hotel_nm, i.hotel_nm_kr, i.nat, i.state, i.state_kr, i.country, i.hotel_adr, i.hotel_tel, i.hotel_url,
+			MIN(r.price1) as price1, MIN(r.price2) as price2, MIN(r.price3) as price3, MIN(r.price4) as price4,
+			r.breakfast_yn, d.room_cnt, d.grade, d.resortfee_yn
 		FROM
 			fit_hotel_info i, fit_hotel_cate c, fit_room_type r, fit_hotel_detail d
 		WHERE
@@ -243,6 +256,30 @@
 		WHERE
 			hotel_nm like '%#{hotelNm}%'
 	</select>
+
+	<select id="selectHotelReview" parameterType="int" resultMap="ReviewInfoResult">
+		SELECT
+			hotel_no, star1, star2, star3, star4, cmt
+		FROM
+			fit_hotel_review
+		WHERE
+			hotel_no = #{hotelNo}
+			<!-- TODO AND user_id = #{user_id} -->
+	</select>
+
+	<insert id="insertReview" parameterType="ReviewInfo">
+		INSERT INTO fit_hotel_review
+			(hotel_no, star1, star2, star3, star4, cmt)
+		VALUES
+			(#{hotelNo}, #{star1}, #{star2}, #{star3}, #{star4}, #{comment})
+		ON DUPLICATE KEY
+		UPDATE
+			star1 = VALUES(star1),
+			star2 = VALUES(star2),
+			star3 = VALUES(star3),
+			star4 = VALUES(star4),
+			cmt = VALUES(cmt)
+	</insert>
 
 	<insert id="truncateHotelCategory">
 		TRUNCATE fit_hotel_cate

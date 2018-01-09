@@ -201,48 +201,45 @@
 <script>
 	$(".fv-slides ul").bxSlider({speed: 600, auto: true, autoControls:false});
 
-	ui.mapSize();
+    <%-- Spec Out GoogleMap
+    ui.mapSize();
+    --%>
 
-	$(document).ready(function () {
+    $(document).ready(function () {
 
-		$("#search_submit").click(function() {
-			/*if ($('#keyword').val() == '') {
-			 alert('검색할 키워드를 입력해주세요.');
-			 return false;
-			 }*/
+        $("#search_submit").click(function() {
 
-			var htParam = {
-				"keyword" : $('#keyword').val(),
-				"startDate" : $('#startDate').val(),
-				"endDate" : $('#endDate').val(),
-				"adultCnt" : $('#adultCnt').val(),
-				"youthCnt" : $('#youthCnt').val(),
-				"babyCnt" : $('#babyCnt').val(),
-				"totalCnt" : $('#totalCnt').val()
-			};
+            var htParam = {
+                "keyword" : $('#keyword').val(),
+                "startDate" : $('#startDate').val(),
+                "endDate" : $('#endDate').val(),
+                "adultCnt" : $('#adultCnt').val(),
+                "youthCnt" : $('#youthCnt').val(),
+                "babyCnt" : $('#babyCnt').val(),
+                "totalCnt" : $('#totalCnt').html()
+            };
 
-			_oRequest = $.ajax({
-				type : "POST",
-				url : "/search",
-				cache : false,
-				data : {
-					"json":JSON.stringify(htParam)
-				},
-				error : function(request,status,error) {
-					if (error != "") {
-						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-					}
+            _oRequest = $.ajax({
+                type : "POST",
+                url : "/search",
+                cache : false,
+                data : {
+                    "json":JSON.stringify(htParam)
+                },
+                error : function(request,status,error) {
+                    if (error != "") {
+                        console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    }
 
-					_oRequest = null;
-				},
-				complete : function(oRes) {
-					console.log(oRes);
-					$("#container").empty();
-					$("#container").html(oRes.responseText);
-				}
-			});
-		});
-	});
+                    _oRequest = null;
+                },
+                complete : function(oRes) {
+                    $("#container").empty();
+                    $("#container").html(oRes.responseText);
+                }
+            });
+        });
+    });
 
     <%-- Spec Out GoogleMap
     var gmap;
@@ -262,25 +259,25 @@
             geocodeAddress("${result.hotelInfo.hotelAddress}");
         </c:forEach>
         //geocodeAddress("${resultList[0].hotelInfo.hotelAddress}");
-	}
+    }
 
-	//function geocodeAddress(geocoder, resultsMap) {
-	function geocodeAddress(address) {
-		//var address = document.getElementById('address').value;
-		console.log(address);
-		//var address = "5000 Kahala Ave, Honolulu, HI 96816";
-		geocoder.geocode({'address': address}, function(results, status) {
-			if (status === 'OK') {
-				console.log('address : ' + address + ', result location : ' + results[0].geometry.location);
-				gmap.setCenter(results[0].geometry.location);
-				var marker = new google.maps.Marker({
-					map: gmap,
-					position: results[0].geometry.location
-				});
-			} else {
-				alert('Geocode was not successful for the following reason: ' + status);
-			}
-		});
-	}
-	--%>
+    //function geocodeAddress(geocoder, resultsMap) {
+    function geocodeAddress(address) {
+        //var address = document.getElementById('address').value;
+        console.log(address);
+        //var address = "5000 Kahala Ave, Honolulu, HI 96816";
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+                console.log('address : ' + address + ', result location : ' + results[0].geometry.location);
+                gmap.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: gmap,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+    --%>
 </script>

@@ -2,13 +2,8 @@ package com.fithawaii.bo;
 
 import com.fithawaii.dao.FitDAO;
 import com.fithawaii.dao.MyBatisConnectionFactory;
-import com.fithawaii.model.Fit;
-import com.fithawaii.model.HotelAllInfo;
-import com.fithawaii.model.HotelCategoryInfo;
-import com.fithawaii.model.HotelDetailInfo;
-import com.fithawaii.model.HotelInfo;
-import com.fithawaii.model.HotelRoomInfo;
-import com.fithawaii.model.SearchInfo;
+import com.fithawaii.model.*;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
@@ -164,6 +159,46 @@ public class FitBO {
 		}
 
 		return hotelAllInfo;
+	}
+
+	public ReviewInfo getHotelReview(int hotelNo) {
+		// connect Mybatis session
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+		ReviewInfo reviewInfo = null;
+
+		try {
+			// connect Mapper
+			FitDAO fitDAO = sqlSession.getMapper(FitDAO.class);
+			reviewInfo = fitDAO.selectHotelReview(hotelNo);
+		} catch (Exception e) {
+			sqlSession.rollback();
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+
+		return reviewInfo;
+	}
+
+	public int writeReview(ReviewInfo reviewInfo) {
+		// connect Mybatis session
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+		int resultCnt = -1;
+
+		try {
+			// connect Mapper
+			FitDAO fitDAO = sqlSession.getMapper(FitDAO.class);
+			resultCnt = fitDAO.insertReview(reviewInfo);
+		} catch (Exception e) {
+			sqlSession.rollback();
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+
+		return resultCnt;
 	}
 
 	public List<Fit> getTest() {

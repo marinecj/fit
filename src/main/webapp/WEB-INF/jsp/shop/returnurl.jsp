@@ -22,8 +22,10 @@
 <body onload="setLGDResult()">
 <p><h1>RETURN_URL (인증결과)</h1></p>
 <div>
+	<%--
 	<p>LGD_RESPCODE (결과코드) : <c:out value="${PAYREQ_MAP.LGD_RESPCODE}"/></p>
 	<p>LGD_RESPMSG (결과메시지): <c:out value="${PAYREQ_MAP.LGD_RESPMSG}"/></p>
+	--%>
 	<form method="post" name="LGD_RETURNINFO" id="LGD_RETURNINFO">
 		<c:forEach items="${PAYREQ_MAP}" var="payReqMap" varStatus="status">
 			<input type='hidden' name='${payReqMap.key}' id='${payReqMap.key}' value='${payReqMap.value}'>

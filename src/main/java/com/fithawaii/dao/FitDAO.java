@@ -1,14 +1,9 @@
 package com.fithawaii.dao;
 
-import com.fithawaii.model.HotelCategoryInfo;
-import com.fithawaii.model.HotelDetailInfo;
-import com.fithawaii.model.SearchInfo;
+import com.fithawaii.model.*;
+
 import java.util.List;
 
-import com.fithawaii.model.Fit;
-import com.fithawaii.model.HotelAllInfo;
-import com.fithawaii.model.HotelInfo;
-import com.fithawaii.model.HotelRoomInfo;
 import java.util.Map;
 
 public interface FitDAO {
@@ -26,6 +21,10 @@ public interface FitDAO {
 	public HotelDetailInfo selectHotelDetailInfo(int hotelNo);
 
 	public HotelInfo selectHotelInfoByName(String hotelNm);
+
+	public ReviewInfo selectHotelReview(int hotelNo);
+
+	public int insertReview(ReviewInfo reviewInfo);
 
 	public List<Fit> selectTest();
 

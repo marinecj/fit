@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+	<tiles-definitions>
+
+	<!-- main -->
+	<definition name="layout" template="/WEB-INF/tiles/layout/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/layout/footer.jsp" />
+	</definition>
+
+	<!-- search -->
+	<definition name="search/*" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/search.jsp" />
+	</definition>
+
+	<!-- region -->
+	<definition name="region/*" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/region.jsp" />
+	</definition>
+
+	<!-- detail -->
+	<definition name="detail/*" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/detail.jsp" />
+	</definition>
+
+	<!-- booking -->
+	<definition name="booking/*" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/booking.jsp" />
+	</definition>
+
+	<!-- buydetail -->
+	<definition name="buydetail/*" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/buydetail.jsp" />
+	</definition>
+
+	<!-- shop -->
+	<definition name="shop/*" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/shop/{1}.jsp" />
+	</definition>
+
+	<!-- login
+	<definition name="login/*" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/login/{1}.jsp" />
+	</definition> -->
+
+	<!--  static
+	<definition name="static/*" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header_login.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/static/{1}.jsp" />
+	</definition>
+	<definition name="static/*/" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header_login.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/static/{1}/index.jsp" />
+	</definition> -->
+
+	<!-- user controller - 마이페이지
+	<definition name="user/mypage/*/" extends="layout">
+		<put-attribute name="header" value="/WEB-INF/tiles/tile/login/header_login_on.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/user/mypage/{1}/index.jsp" />
+	</definition>
+	<definition name="user/mypage/*" extends="layout" >
+		<put-attribute name="header" value="/WEB-INF/tiles/tile/login/header_login_on.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/user/mypage/{1}.jsp" />
+	</definition>
+
+	 <definition name="user/mypage/popup/*" extends="popup_layout" >
+		<put-attribute name="popup" value="/WEB-INF/jsp/user/mypage/popup/{1}.jsp" />
+	</definition> -->
+
+
+
+	<!--<definition name="*/*/*/" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/{1}/{2}/{3}/index.jsp" />
+	</definition>
+	<definition name="*/*/" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/{1}/{2}/index.jsp" />
+	</definition>
+	<definition name="*/" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/{1}/index.jsp" />
+	</definition>-->
+
+</tiles-definitions>
