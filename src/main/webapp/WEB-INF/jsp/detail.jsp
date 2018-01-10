@@ -9,20 +9,20 @@
 			<div class="col1">
 				<div class="detail-slide">
 					<ul>
-						<li><img src="${Img}/temp/detail_top.jpg" alt="" /></li>
-						<li><img src="${Img}/temp/detail_top.jpg" alt="" /></li>
-						<li><img src="${Img}/temp/detail_top.jpg" alt="" /></li>
+<c:forEach begin="1" end="3" varStatus="status">
+						<li><img src="${Img}/data/${detail.hotelNo}/${status.count}_detail.jpg" alt="${detail.hotelNmKr}" /></li>
+</c:forEach>
 					</ul>
 				</div>
 			</div>
 			<div class="col2">
 				<h2>${detail.hotelNmKr}<p>${detail.hotelNm}</p></h2>
 				<div class="base-info">
-					<p>75-5660 Palani Road, 카일루아 코나, HI, 96740, 미국</p>
+					<p>${detail.hotelAddress}</p>
 					<p class="e-list">
-						<span>TEL : + 808 661 0031</span>
-						<span>FAX : + 808 661 0031</span>
-						<span>426객실</span>
+						<span>TEL : ${detail.hotelTel}</span>
+						<%--<span>FAX : + 808 661 0031</span>--%>
+						<span>${detail.roomCnt}객실</span>
 					</p>
 				</div>
 				<div class="etc-info">
@@ -75,18 +75,18 @@
 		<div class="detail-info-sec">
 			<div class="option-info-article">
 				<ul>
-					<%--<c:if test="${detail.breakfastYn == 'Y'}">
+					<c:if test="${hotelAllInfoList[0].roomInfo.breakfastYn == 'Y'}">
 					<li class="ico-opt ty1">
 						<strong>조식포함</strong>
 						<p>호텔에서 제공되는 조식이<br />포함되어 있습니다.</p>
 					</li>
-					</c:if>--%>
-					<c:if test="${detail.resortfeeYn == 'Y'}">
+					</c:if>
+					<%--<c:if test="${detail.resortfeeYn == 'Y'}">
 					<li class="ico-opt ty2">
 						<strong>석식 포함</strong>
 						<p>리조트피(Resort Fee)가<br />포함되어 있습니다.</p>
 					</li>
-					</c:if>
+					</c:if>--%>
 					<c:if test="${detail.resortfeeYn == 'Y'}">
 					<li class="ico-opt ty3">
 						<strong>리조트피 포함</strong>
@@ -194,7 +194,7 @@
 
 			<h3>호텔소개</h3>
 			<div class="hotel-info-article">
-				Hyatt Place Waikiki Beach는 와이키키 비치와 1블럭 떨어진 곳(도보2분)에 위치하며 메리엇 와이키키 비치 리조트 바로 뒷편에 자리잡고 있다.<br />
+				<%--Hyatt Place Waikiki Beach는 와이키키 비치와 1블럭 떨어진 곳(도보2분)에 위치하며 메리엇 와이키키 비치 리조트 바로 뒷편에 자리잡고 있다.<br />
 				합리적인 요금에 호놀룰루 중심 위치와 리노베이션으로 쾌적한 숙박 환경, 조식 제공이 되어 요금대비 만족도가 높은 호텔이다.<br />
 				또한 와이키키수족관, 카피올라니공원,다이아몬드헤드 분화구,아틀란티스 잠수함등 다양한 관광지가 근거리에 있어 하와이의 문화를 느끼기에 충분하다.<br /><br />
 				스타일리쉬한 가구와 모던한 인테리어로 장식된 객실은 거실과 침실공간이 있는 여유있는 크기에 도시전경,산,바다등<br />
@@ -216,7 +216,8 @@
 				- 주차 : $30 / 24hours (Self Parking will be $18 per night (based on space availability), and Valet Parking will be $28 per night.)<br />
 				- 체크인 : 오후 15:00 이후 / 체크아웃 : 오전 11시 이전<br />
 				- 홈페이지 : <a href="#" target="_blank">http://www.hyattplacewaikikibeach.com</a><br /><br />
-				* 상기 내용은 호텔측의 고지 없이 변경될 수 있습니다.
+				* 상기 내용은 호텔측의 고지 없이 변경될 수 있습니다.--%>
+				${detail.touristAttraction}
 			</div>
 
 			<h3>호텔사진</h3>
@@ -293,8 +294,8 @@
 				<div class="map-box"><img src="${Img}/temp/detail_map.jpg" alt="550*410" /></div>
 				<dl>
 					<dt>주소</dt>
-					<dd>75-5660 Palani Road, 카일루아 코나, HI, 96740, 미국</dd>
-					<dd>TEL : + 808 661 0031</dd>
+					<dd>${detail.hotelAddress}</dd>
+					<dd>TEL : ${detail.hotelTel}</dd>
 					<dt>교통</dt>
 					<dd>- 공항 Honolulu International Airport (HNL)- 16km</dd>
 					<dd>- 공항에서 택시 이용시 약 $45-50</dd>

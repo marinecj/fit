@@ -125,7 +125,7 @@
 					<li>
 						<a href="javascript:detail('${result.hotelInfo.hotelNo}');">
 							<div class="photo-box">
-								<div class="photo"><img src="${Img}/temp/goods_list_photo.jpg" alt="350*300" /></div>
+								<div class="photo"><img src="${Img}/data/${detail.hotelNo}/list.jpg" alt="${result.hotelInfo.hotelNmKr}" /></div>
 								<div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
 							</div>
 							<div class="info-box">
