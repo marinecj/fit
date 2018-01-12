@@ -8,7 +8,7 @@
 		<h1><a href="/"><img src="${Img}/layout/logo.png" alt="FITHAWALL" /></a></h1>
 		<div class="gnb">
 			<ul>
-				<li><a href="javascript:region('오하후');">오하후</a></li>
+				<li><a href="javascript:region('오아후');">오아후</a></li>
 				<li><a href="javascript:region('마우이');">마우이</a></li>
 				<li><a href="javascript:region('빅아일랜드');">빅아일랜드</a></li>
 				<li><a href="javascript:region('카우아이');">카우아이</a></li>

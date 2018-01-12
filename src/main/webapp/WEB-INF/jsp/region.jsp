@@ -41,7 +41,7 @@
 					<input type="text" id="keyword" maxlength="10" data-placeholder="어떤 스타일의 호텔을 원하세요?" placeholder="어떤 스타일의 호텔을 원하세요?" />
 					<div class="ui-autocomplete-wrap">
 						<div class="other">
-							<span><a href="javascript:region('오하후');">오하후</a></span>
+							<span><a href="javascript:region('오아후');">오아후</a></span>
 							<span><a href="javascript:region('마우이');">마우이</a></span>
 							<span><a href="javascript:region('빅아일랜드');">빅아일랜드</a></span>
 							<span><a href="javascript:region('카우아이');">카우아이</a></span>
@@ -151,7 +151,7 @@
 				<li>
 					<a href="javascript:detail('${result.hotelInfo.hotelNo}');">
 						<div class="photo-box">
-							<div class="photo"><img src="${Img}/data/${detail.hotelNo}/list.jpg" alt="${result.hotelInfo.hotelNmKr}" /></div>
+							<div class="photo"><img src="${Img}/data/${result.hotelInfo.hotelNo}/list.jpg" alt="${result.hotelInfo.hotelNmKr}" /></div>
 							<div class="flag"><em>FITPRICE</em><strong>1박당 5만원 할인</strong></div>
 						</div>
 						<div class="info-box">
