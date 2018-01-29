@@ -158,25 +158,31 @@ public class ExcelImportController {
 									if (columnIndex == 0) {
 										// 호텔명 셋팅
 										String hotelNm = value;
-										if (value.indexOf("포터레이지") >= 0) {
-											hotelNm = value.substring(0, value.indexOf("포터레이지")).trim();
-										} else if (value.indexOf("PH") >= 0) {
-											hotelNm = value.substring(0, value.indexOf("PH")).trim();
-										} else if (value.indexOf("(") >= 0) {
-											hotelNm = value.substring(0, value.indexOf("(")).trim();
+										if (cateRowNum == -1 || cateRowNum < rowIndex - 1) {
+											// 호텔명 한글
+											if (value.indexOf("포터레이지") >= 0) {
+												hotelNm = value.substring(0, value.indexOf("포터레이지")).trim();
+											} else if (value.indexOf("PH") >= 0) {
+												hotelNm = value.substring(0, value.indexOf("PH")).trim();
+											} else if (value.indexOf("(") >= 0) {
+												hotelNm = value.substring(0, value.indexOf("(")).trim();
+											}
+											//System.out.println("###### hotelNm :" + hotelNm);
+
+											// 호텔 데이터 row 시작 => 리셋
+											hotelInfo = new HotelInfo();
+
+											hotelNo++;
+											hotelInfo.setHotelNmKr(hotelNm);
+											hotelInfo.setHotelNo(hotelNo);
+											hotelInfo.setState(state);
+										} else {
+											// 호텔명 영문
+											hotelInfo.setHotelNm(hotelNm);
+
+											// 호텔 정보 리스트에 저장
+											hotelInfoList.add(hotelInfo);
 										}
-										//System.out.println("###### hotelNm :" + hotelNm);
-
-										// 호텔 데이터 row 시작 => 리셋
-										hotelInfo = new HotelInfo();
-
-										hotelNo++;
-										hotelInfo.setHotelNm(hotelNm);
-										hotelInfo.setHotelNo(hotelNo);
-										hotelInfo.setState(state);
-
-										// 호텔 정보 리스트에 저장
-										hotelInfoList.add(hotelInfo);
 									} else if (columnIndex == 1) {
 										// 카테고리
 										if (value.indexOf("<") >= 0) {
@@ -274,7 +280,7 @@ public class ExcelImportController {
 		}
 
 		for (HotelInfo hotelInfo : hotelInfoList) {
-			System.out.println("hotelNo : " + hotelInfo.getHotelNo() + ", hotelNm : " + hotelInfo.getHotelNm());
+			System.out.println("hotelNo : " + hotelInfo.getHotelNo() + ", hotelNm : " + hotelInfo.getHotelNm() + ", hotelNmKr : " + hotelInfo.getHotelNmKr());
 		}
 		System.out.println("==================================");
 		for (HotelCategoryInfo hotelCategoryInfo : hotelCategoryInfoList) {
