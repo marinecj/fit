@@ -119,6 +119,119 @@
 	<!-- end : includeFooter -->
 </div><!-- end : wrap -->
 
+<%--
+<div class="last-chk-view act"><!-- act 클랙스가 있음 펼쳐짐. -->
+	<div class="out-wrap">
+		<a href="#" class="i-btn bt-last-open">open</a>
+		<div class="in-wrap">
+			<div class="col1">
+				<h3>최근 본 상품 <em>15</em>개</h3>
+				<div class="lv-list">
+					<ul>
+						<li>
+							<div class="in">
+								<a href="#" class="i-btn bt-delete">지우기</a>
+								<a href="#" class="info">
+									<span class="photo"><img src="../asset/images/temp/last_view_photo.jpg" alt="" /></span>
+									<span class="txt">
+                    <em>나필리 카이<br />비치 리조트</em>
+                    <strong>256,000원</strong>
+                  </span>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div class="in">
+								<a href="#" class="i-btn bt-delete">지우기</a>
+								<a href="#" class="info">
+									<span class="photo"><img src="../asset/images/temp/last_view_photo.jpg" alt="" /></span>
+									<span class="txt">
+                    <em>나필리 카이<br />비치 리조트</em>
+                    <strong>256,000원</strong>
+                  </span>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div class="in">
+								<a href="#" class="i-btn bt-delete">지우기</a>
+								<a href="#" class="info">
+									<span class="photo"><img src="../asset/images/temp/last_view_photo.jpg" alt="" /></span>
+									<span class="txt">
+                    <em>나필리 카이<br />비치 리조트</em>
+                    <strong>256,000원</strong>
+                  </span>
+								</a>
+							</div>
+						</li>
+						<li></li>
+						<li></li>
+						<li>
+							<div class="in">
+								<a href="#" class="i-btn bt-delete">지우기</a>
+								<a href="#" class="info">
+									<span class="photo"><img src="../asset/images/temp/last_view_photo.jpg" alt="" /></span>
+									<span class="txt">
+                    <em>나필리 카이<br />비치 리조트</em>
+                    <strong>256,000원</strong>
+                  </span>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div class="in">
+								<a href="#" class="i-btn bt-delete">지우기</a>
+								<a href="#" class="info">
+									<span class="photo"><img src="../asset/images/temp/last_view_photo.jpg" alt="" /></span>
+									<span class="txt">
+                    <em>나필리 카이<br />비치 리조트</em>
+                    <strong>256,000원</strong>
+                  </span>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div class="in">
+								<a href="#" class="i-btn bt-delete">지우기</a>
+								<a href="#" class="info">
+									<span class="photo"><img src="../asset/images/temp/last_view_photo.jpg" alt="" /></span>
+									<span class="txt">
+                    <em>나필리 카이<br />비치 리조트</em>
+                    <strong>256,000원</strong>
+                  </span>
+								</a>
+							</div>
+						</li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col2">
+				<h3><span>추천상품</span></h3>
+				<div class="lv-list">
+					<ul>
+						<li>
+							<div class="in">
+								<a href="#" class="i-btn bt-delete">지우기</a>
+								<a href="#" class="info">
+									<span class="photo"><img src="../asset/images/temp/last_view_photo.jpg" alt="" /></span>
+									<span class="txt">
+                    <em>나필리 카이<br />비치 리조트</em>
+                    <strong>256,000원</strong>
+                  </span>
+								</a>
+							</div>
+						</li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+--%>
+
 <div class="layer-area-wrap">
 
 	<div class="layer-pop" id="pop-join">

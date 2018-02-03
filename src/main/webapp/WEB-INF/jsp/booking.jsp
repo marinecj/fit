@@ -2,6 +2,7 @@
 <%@ include file="/WEB-INF/jsp/include/taglibs.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/urls.jsp" %>
 
+<div id="container" class="reservation-wrap">
 <div id="contents">
 
 	<form method="post" id="LGD_PAYINFO" action="/shop/payreq">
@@ -276,6 +277,7 @@
 	</form>
 
 </div><!-- end : #contents -->
+</div><!-- end : #container -->
 
 <%@ include file="/WEB-INF/jsp/include/javascripts.jsp" %>
 
